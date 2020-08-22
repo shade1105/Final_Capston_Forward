@@ -62,7 +62,7 @@ export class SignupComponent implements OnInit {
     //Register User
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {
-        this.flashMessage.show("등록한 정보로 로그인이 가능합니다", {
+        this.flashMessage.show(data.msg, {
           cssClass: "alert-success",
           timeout: 3000
         });

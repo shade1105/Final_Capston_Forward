@@ -52,8 +52,32 @@ def register():
         return result
 
 
+# 로그인 로직
+@app.route("/static/users/authenticate", methods=['POST'])
+def signIn():
+    stu_num = request.get_json()['stu_num']
+    password = request.get_json()['password']
 
+    db = Signdatabase()
+    msg = db.login(stu_num, password)
+    if msg == True:
+        token = create_access_token(identity={'stu_num': stu_num})
+        user = db.getUserbyStu_num(stu_num)
+        result = {
+            "success": True,
+            "msg": "로그인되었습니다",
+            "token": token,
+            "user": user
+        }
+        print(result)
+        return result
 
+    else:
+        result = {
+            "success": False,
+            "msg": msg
+        }
+        return result
 
 
 

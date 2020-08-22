@@ -22,12 +22,12 @@ export class AuthService {
   constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
 
   registerUser(user): Observable<any> {
-    const registerUrl = this.prepEndpoint("/static/users/register");
+    const registerUrl = this.prepEndpoint("static/users/register");
     return this.http.post(registerUrl, user, httpOptions);
   }
 
   authenticateUser(login): Observable<any> {
-    const loginUrl = this.prepEndpoint("/static/users/authenticate");
+    const loginUrl = this.prepEndpoint("static/users/authenticate");
     return this.http.post(loginUrl, login, httpOptions);
   }
   getProfile(): Observable<any> {
@@ -38,7 +38,7 @@ export class AuthService {
         Authorization: this.authToken
       })
     };
-    const profileUrl = this.prepEndpoint("/static/users/profile");
+    const profileUrl = this.prepEndpoint("static/users/profile");
     return this.http.get(profileUrl, httpOptions1);
   }
 
@@ -49,7 +49,7 @@ export class AuthService {
 
   storeUserData(token, userNoPW) {
     localStorage.setItem("idtoken", token);
-    localStorage.setItem("user", JSON.stringify(userNoPW));
+    localStorage.setItem("user", userNoPW);
     this.authToken = token;
     this.userNoPW = userNoPW;
   }

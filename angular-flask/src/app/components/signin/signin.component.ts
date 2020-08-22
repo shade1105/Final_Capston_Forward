@@ -4,7 +4,7 @@ import { Router } from "@angular/router";
 import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
-  selector: "app-login",
+  selector: "app-signin",
   templateUrl: "./signin.component.html",
   styleUrls: ["./signin.component.scss"]
 })
@@ -20,14 +20,14 @@ export class SigninComponent implements OnInit {
   ngOnInit() { }
 
   onLoginSubmit() {
-    const login = {
+    const signin = {
       stu_num: this.stu_num,
       password: this.password
     };
-    this.authService.authenticateUser(login).subscribe(data => {
+    this.authService.authenticateUser(signin).subscribe(data => {
       if (data.success) {
         this.authService.storeUserData(data.token, data.user);
-        this.flashMessage.show("You are now logged in", {
+        this.flashMessage.show(data.msg, {
           cssClass: "alert-success",
           timeout: 5000
         });
@@ -37,7 +37,7 @@ export class SigninComponent implements OnInit {
           cssClass: "alert-danger",
           timeout: 5000
         });
-        this.router.navigate(["/login"]);
+        this.router.navigate(["/signin"]);
       }
     });
   }
