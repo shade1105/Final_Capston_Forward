@@ -58,7 +58,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Features</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Pricing</a>\r\n      </li>\r\n      <li class=\"nav-item dropdown\">\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n          Dropdown link\r\n        </a>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">\r\n          <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<nav class=\"navbar navbar-expand-lg navbar-light bg-light\">\r\n  <a class=\"navbar-brand\" href=\"#\">Navbar</a>\r\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNavDropdown\" aria-controls=\"navbarNavDropdown\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\r\n    <span class=\"navbar-toggler-icon\"></span>\r\n  </button>\r\n  <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">\r\n    <ul class=\"navbar-nav\">\r\n      <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" href=\"\">Home <span class=\"sr-only\">(current)</span></a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Features</a>\r\n      </li>\r\n      <li class=\"nav-item\">\r\n        <a class=\"nav-link\" href=\"#\">Pricing</a>\r\n      </li>\r\n      <li class=\"nav-item dropdown\">\r\n        <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n          Dropdown link\r\n        </a>\r\n        <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">\r\n          <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n          <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n        </div>\r\n      </li>\r\n    </ul>\r\n  </div>\r\n</nav>\r\n");
 
 /***/ }),
 
@@ -71,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<p>signin works!</p>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 class=\"page-header\">Sign in</h2>\n<form (ngSubmit)=\"onLoginSubmit()\">\n  <div class=\"form-group\">\n    <label>Student Number</label>\n    <input\n      type=\"text\"\n      class=\"form-control\"\n      name=\"stu_num\"\n      [(ngModel)]=\"stu_num\"\n    />\n  </div>\n  <div class=\"form-group\">\n    <label>Password</label>\n    <input\n      type=\"password\"\n      class=\"form-control\"\n      name=\"password\"\n      [(ngModel)]=\"password\"\n    />\n  </div>\n  <input type=\"submit\" class=\"btn btn-primary\" value=\"Login\" />\n</form>\n");
 
 /***/ }),
 
@@ -637,16 +637,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SigninComponent", function() { return SigninComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! angular2-flash-messages */ "./node_modules/angular2-flash-messages/module/index.js");
+/* harmony import */ var angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
 
 
 var SigninComponent = /** @class */ (function () {
-    function SigninComponent() {
+    function SigninComponent(authService, router, flashMessage) {
+        this.authService = authService;
+        this.router = router;
+        this.flashMessage = flashMessage;
     }
-    SigninComponent.prototype.ngOnInit = function () {
+    SigninComponent.prototype.ngOnInit = function () { };
+    SigninComponent.prototype.onLoginSubmit = function () {
+        var _this = this;
+        var signin = {
+            stu_num: this.stu_num,
+            password: this.password
+        };
+        this.authService.authenticateUser(signin).subscribe(function (data) {
+            if (data.success) {
+                _this.authService.storeUserData(data.token, data.user);
+                _this.flashMessage.show(data.msg, {
+                    cssClass: "alert-success",
+                    timeout: 5000
+                });
+                _this.router.navigate([""]);
+            }
+            else {
+                _this.flashMessage.show(data.msg, {
+                    cssClass: "alert-danger",
+                    timeout: 5000
+                });
+                _this.router.navigate(["/signin"]);
+            }
+        });
     };
+    SigninComponent.ctorParameters = function () { return [
+        { type: _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
+        { type: angular2_flash_messages__WEBPACK_IMPORTED_MODULE_4__["FlashMessagesService"] }
+    ]; };
     SigninComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-            selector: 'app-signin',
+            selector: "app-signin",
             template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./signin.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/components/signin/signin.component.html")).default,
             styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./signin.component.scss */ "./src/app/components/signin/signin.component.scss")).default]
         })
@@ -705,6 +743,14 @@ var SignupComponent = /** @class */ (function () {
     };
     SignupComponent.prototype.onRegisterSubmit = function () {
         var _this = this;
+        if (this.password !== this.passwordcheck) {
+            console.log("패스워드가 다릅니다");
+            this.flashMessage.show("패스워드가 다릅니다. 다시 입력해주세요", {
+                cssClass: "alert-danger",
+                timeout: 3000
+            });
+            return false;
+        }
         var user = {
             stu_num: this.stu_num,
             name: this.name,
@@ -727,18 +773,10 @@ var SignupComponent = /** @class */ (function () {
             });
             return false;
         }
-        if (this.password !== this.passwordcheck) {
-            console.log("패스워드가 다릅니다");
-            this.flashMessage.show("패스워드가 다릅니다. 다시 입력해주세요", {
-                cssClass: "alert-danger",
-                timeout: 3000
-            });
-            return false;
-        }
         //Register User
         this.authService.registerUser(user).subscribe(function (data) {
             if (data.success) {
-                _this.flashMessage.show("등록한 정보로 로그인이 가능합니다", {
+                _this.flashMessage.show(data.msg, {
                     cssClass: "alert-success",
                     timeout: 3000
                 });
@@ -848,11 +886,11 @@ var AuthService = /** @class */ (function () {
         this.jwtHelper = jwtHelper;
     }
     AuthService.prototype.registerUser = function (user) {
-        var registerUrl = this.prepEndpoint("users/register");
+        var registerUrl = this.prepEndpoint("static/users/register");
         return this.http.post(registerUrl, user, httpOptions);
     };
     AuthService.prototype.authenticateUser = function (login) {
-        var loginUrl = this.prepEndpoint("users/authenticate");
+        var loginUrl = this.prepEndpoint("static/users/authenticate");
         return this.http.post(loginUrl, login, httpOptions);
     };
     AuthService.prototype.getProfile = function () {
@@ -863,16 +901,16 @@ var AuthService = /** @class */ (function () {
                 Authorization: this.authToken
             })
         };
-        var profileUrl = this.prepEndpoint("users/profile");
+        var profileUrl = this.prepEndpoint("static/users/profile");
         return this.http.get(profileUrl, httpOptions1);
     };
     AuthService.prototype.getList = function () {
-        var listUrl = this.prepEndpoint("users/list");
+        var listUrl = this.prepEndpoint("static/users/list");
         return this.http.get(listUrl, httpOptions);
     };
     AuthService.prototype.storeUserData = function (token, userNoPW) {
         localStorage.setItem("idtoken", token);
-        localStorage.setItem("user", JSON.stringify(userNoPW));
+        localStorage.setItem("user", userNoPW);
         this.authToken = token;
         this.userNoPW = userNoPW;
     };
@@ -885,8 +923,8 @@ var AuthService = /** @class */ (function () {
         return !this.jwtHelper.isTokenExpired(this.authToken);
     };
     AuthService.prototype.prepEndpoint = function (ep) {
-        //return "http://localhost:3306/" + ep;
-        return ep;
+        return "http://localhost:9999/" + ep;
+        //return ep;
     };
     AuthService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
