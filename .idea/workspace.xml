@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5bd0eb3e-6924-431c-81dd-60e430c8d860" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/main.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/static/main.js.map" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,22 +116,22 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1700" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598080279824" />
-    <state width="1256" height="325" key="GridCell.Tab.0.bottom" timestamp="1598172457213">
+    <state width="1256" height="325" key="GridCell.Tab.0.bottom" timestamp="1598177314037">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598172457213" />
-    <state width="1256" height="325" key="GridCell.Tab.0.center" timestamp="1598172457213">
+    <state width="1256" height="325" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
+    <state width="1256" height="325" key="GridCell.Tab.0.center" timestamp="1598177314037">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598172457213" />
-    <state width="1256" height="325" key="GridCell.Tab.0.left" timestamp="1598172457213">
+    <state width="1256" height="325" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
+    <state width="1256" height="325" key="GridCell.Tab.0.left" timestamp="1598177314037">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598172457213" />
-    <state width="1256" height="325" key="GridCell.Tab.0.right" timestamp="1598172457213">
+    <state width="1256" height="325" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
+    <state width="1256" height="325" key="GridCell.Tab.0.right" timestamp="1598177314037">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598172457213" />
+    <state width="1256" height="325" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
     <state width="1256" height="488" key="GridCell.Tab.1.bottom" timestamp="1597931643726">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -158,10 +156,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1612" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598080581739" />
-    <state x="53" y="73" width="958" height="1099" key="dock-window-1" timestamp="1598172796779">
+    <state x="-271" y="291" width="958" height="1099" key="dock-window-1" timestamp="1598177318276">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="53" y="73" width="958" height="1099" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598172796779" />
+    <state x="-271" y="291" width="958" height="1099" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177318276" />
     <state x="-653" y="319" width="958" height="1026" key="dock-window-2" timestamp="1598119161451">
       <screen x="-2560" y="0" width="2560" height="1400" />
     </state>
