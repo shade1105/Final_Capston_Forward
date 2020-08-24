@@ -28,20 +28,23 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../face_recognition" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\assets" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app\components\image-capture" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\static" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\home" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\public" />
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
@@ -112,26 +115,26 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="734" y="354" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1597840000363" />
-    <state x="1700" y="454" key="FileChooserDialogImpl" timestamp="1598080279824">
+    <state x="1700" y="454" key="FileChooserDialogImpl" timestamp="1598260674795">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="1700" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598080279824" />
-    <state width="1256" height="325" key="GridCell.Tab.0.bottom" timestamp="1598177314037">
+    <state x="1700" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598260674795" />
+    <state width="1256" height="325" key="GridCell.Tab.0.bottom" timestamp="1598211343117">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
-    <state width="1256" height="325" key="GridCell.Tab.0.center" timestamp="1598177314037">
+    <state width="1256" height="325" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598211343117" />
+    <state width="1256" height="325" key="GridCell.Tab.0.center" timestamp="1598211343117">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
-    <state width="1256" height="325" key="GridCell.Tab.0.left" timestamp="1598177314037">
+    <state width="1256" height="325" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598211343117" />
+    <state width="1256" height="325" key="GridCell.Tab.0.left" timestamp="1598211343116">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
-    <state width="1256" height="325" key="GridCell.Tab.0.right" timestamp="1598177314037">
+    <state width="1256" height="325" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598211343116" />
+    <state width="1256" height="325" key="GridCell.Tab.0.right" timestamp="1598211343117">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state width="1256" height="325" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177314037" />
+    <state width="1256" height="325" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598211343117" />
     <state width="1256" height="488" key="GridCell.Tab.1.bottom" timestamp="1597931643726">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -156,10 +159,10 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1612" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598080581739" />
-    <state x="-271" y="291" width="958" height="1099" key="dock-window-1" timestamp="1598177318276">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="-862" y="142" width="958" height="1099" key="dock-window-1" timestamp="1598254956803">
+      <screen x="-2560" y="0" width="2560" height="1400" />
     </state>
-    <state x="-271" y="291" width="958" height="1099" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598177318276" />
+    <state x="-862" y="142" width="958" height="1099" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598254956803" />
     <state x="-653" y="319" width="958" height="1026" key="dock-window-2" timestamp="1598119161451">
       <screen x="-2560" y="0" width="2560" height="1400" />
     </state>

@@ -21,8 +21,10 @@
     "@angular/router": "~8.2.14",
     "@auth0/angular-jwt": "^5.0.1",
     "angular2-flash-messages": "^3.0.1",
+    "ngx-webcam": "^0.3.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "webcam-easy": "^1.0.5",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

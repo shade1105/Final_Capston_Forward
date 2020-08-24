@@ -5,12 +5,15 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
+import { ImageCaptureComponent } from './components/image-capture/image-capture.component';
+
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
   { path: "navbar", component: NavbarComponent },
   { path: "signup", component: SignupComponent },
-  { path: "signin", component: SigninComponent}
+  { path: "signin", component: SigninComponent},
+  { path: "image-capture", component: ImageCaptureComponent}
 ];
 
 @NgModule({
