@@ -17,6 +17,7 @@ socketio = SocketIO(app)
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 CORS(app)
+temStu_num = ''
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -73,6 +74,8 @@ def signIn():
             "token": token,
             "user": user
         }
+        global temStu_num
+        temStu_num = stu_num
         print(result)
         return result
 
@@ -96,8 +99,7 @@ def decode():
     f.closed
 
     im = Image.open(BytesIO(base64.b64decode(data)))
-    im.save('soso.png', 'PNG')
-
+    im.save('./student/images/{}.jpg'.format(temStu_num), 'JPG')
     return "null"
 
 # 로그아웃 로직
@@ -111,7 +113,7 @@ def logout():
 # 쿠키 값 확인 로직
 @app.route("/loginstatus")
 def cookie_status():
-    tempstr = request.cookies.get('USERID', '빈문자열')
+    tempstr = request.cookies.get('stu_num', '빈문자열')
     tempstr = tempstr.encode("UTF-8")
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
