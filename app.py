@@ -7,6 +7,8 @@ import base64
 from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
 from models.user import User
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'BCODE_Flask'
@@ -16,9 +18,11 @@ jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 CORS(app)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
+
 
 @app.route('/static/', methods=['GET', 'POST'])
 def home1():
@@ -76,10 +80,25 @@ def signIn():
         result = {
             "success": False,
             "msg": msg
+
         }
+        print(result)
         return result
 
 
+@app.route("/static/image/decodeImage", methods=['POST'])
+def decode():
+    f = open('file.txt', 'w')
+    f.write(request.get_json().replace('data:image/png;base64,', ''))
+    f.close()
+    f = open('file.txt', 'r')
+    data = f.read()
+    f.closed
+
+    im = Image.open(BytesIO(base64.b64decode(data)))
+    im.save('soso.png', 'PNG')
+
+    return "null"
 
 # 로그아웃 로직
 @app.route('/logout')
@@ -96,7 +115,6 @@ def cookie_status():
     tempstr = tempstr.encode("UTF-8")
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
-
 
 
 if __name__ == '__main__':
