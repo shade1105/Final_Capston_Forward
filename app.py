@@ -6,7 +6,6 @@ import hashlib
 import base64
 from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
-import urllib.request
 from models.user import User
 from PIL import Image
 from io import BytesIO
@@ -17,6 +16,7 @@ socketio = SocketIO(app)
 
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
+
 CORS(app)
 temStu_num = ''
 
@@ -100,7 +100,7 @@ def decode():
     f.closed
 
     im = Image.open(BytesIO(base64.b64decode(data)))
-    im.save('./student/images/{}.jpg'.format(temStu_num), 'JPG')
+    im.save('./student/images/{}.jpg'.format(temStu_num), 'png')
     return "null"
 
 # 로그아웃 로직
@@ -118,14 +118,6 @@ def cookie_status():
     tempstr = tempstr.encode("UTF-8")
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
-
-
-# 이미지 업로드 로직
-@app.route('/static/users/uploadimage', methods=['GET'])
-def getimage():
-
-    return 0
-
 
 
 if __name__ == '__main__':

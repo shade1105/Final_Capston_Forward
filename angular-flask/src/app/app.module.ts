@@ -20,6 +20,7 @@ import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
+import { ActionCamComponent } from './components/action-cam/action-cam.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RequestAttentionComponent } from './components/request-attention/reques
     HomeComponent,
     SignupComponent,
     SigninComponent,
-    RequestAttentionComponent
+    RequestAttentionComponent,
+    ActionCamComponent
   ],
   imports: [
     BrowserModule,

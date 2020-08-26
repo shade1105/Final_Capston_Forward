@@ -14,7 +14,8 @@ const routes: Routes = [
   { path: "navbar", component: NavbarComponent },
   { path: "signup", component: SignupComponent },
   { path: "signin", component: SigninComponent},
-  { path: "req-atten", component: RequestAttentionComponent}
+  { path: "req-atten", component: RequestAttentionComponent},
+  { path: "action-cam", component: ActionCamComponent}
 ];
 
 @NgModule({

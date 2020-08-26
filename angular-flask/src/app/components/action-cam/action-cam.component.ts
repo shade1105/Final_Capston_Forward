@@ -70,8 +70,8 @@ export class ActionCamComponent implements OnInit {
   saveas() {
     var encdoeImage = this.canvas.nativeElement.toDataURL("image/png");
 
-    const soulkey = JSON.stringify(encdoeImage);
-    this.authService.sendImageDecode(soulkey).subscribe();
+    const jsonEncodeImage = JSON.stringify(encdoeImage);
+    this.authService.sendImageDecode(jsonEncodeImage).subscribe();
   }
 
   ngOnInit() {
