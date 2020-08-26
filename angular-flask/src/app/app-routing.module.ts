@@ -7,7 +7,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ActionCamComponent } from "./components/action-cam/action-cam.component";
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
-
+import { AttenComponent } from './components/atten/atten.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: "signup", component: SignupComponent },
   { path: "signin", component: SigninComponent},
   { path: "req-atten", component: RequestAttentionComponent},
-  { path: "action-cam", component: ActionCamComponent}
+  { path: "action-cam", component: ActionCamComponent},
+  { path: "atten", component: AttenComponent}
 ];
 
 @NgModule({

@@ -11,7 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
-
+import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
+import { ActionCamComponent } from './components/action-cam/action-cam.component';
+import { AttenComponent } from './components/atten/atten.component';
 
 import { AuthGuard } from "./guards/auth.guards";
 import { JwtModule } from "@auth0/angular-jwt";
@@ -19,8 +21,8 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
-import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
-import { ActionCamComponent } from './components/action-cam/action-cam.component';
+
+
 
 
 @NgModule({
@@ -31,7 +33,8 @@ import { ActionCamComponent } from './components/action-cam/action-cam.component
     SignupComponent,
     SigninComponent,
     RequestAttentionComponent,
-    ActionCamComponent
+    ActionCamComponent,
+    AttenComponent
   ],
   imports: [
     BrowserModule,
