@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { User, Login, UserNoPW } from "../models/User";
 import { JwtHelperService } from "@auth0/angular-jwt";
@@ -6,12 +6,12 @@ import { Observable } from "rxjs";
 
 const httpOptions = {
   headers: new HttpHeaders({
-    "Content-Type": "application/json"
-  })
+    "Content-Type": "application/json",
+  }),
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AuthService {
   authToken: any;
@@ -19,7 +19,7 @@ export class AuthService {
   login: Login;
   userNoPW: UserNoPW;
 
-  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) { }
+  constructor(private http: HttpClient, public jwtHelper: JwtHelperService) {}
 
   registerUser(user): Observable<any> {
     const registerUrl = this.prepEndpoint("static/users/register");
@@ -35,8 +35,8 @@ export class AuthService {
     const httpOptions1 = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: this.authToken
-      })
+        Authorization: this.authToken,
+      }),
     };
     const profileUrl = this.prepEndpoint("static/users/profile");
     return this.http.get(profileUrl, httpOptions1);
@@ -61,7 +61,12 @@ export class AuthService {
   loggedIn() {
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
-    prepEndpoint(ep) {
+  sendImageDecode(encdoeData): Observable<any> {
+    const sendImage = this.prepEndpoint("static/image/decodeImage");
+
+    return this.http.post(sendImage, encdoeData, httpOptions);
+  }
+  prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;
     //return ep;
   }

@@ -5,7 +5,7 @@ import { NavbarComponent } from './components/navbar/navbar.component'
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
-import { ImageCaptureComponent } from './components/image-capture/image-capture.component';
+import { ActionCamComponent } from "./components/action-cam/action-cam.component";
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
 
 
@@ -14,7 +14,6 @@ const routes: Routes = [
   { path: "navbar", component: NavbarComponent },
   { path: "signup", component: SignupComponent },
   { path: "signin", component: SigninComponent},
-  { path: "image-capture", component: ImageCaptureComponent},
   { path: "req-atten", component: RequestAttentionComponent}
 ];
 

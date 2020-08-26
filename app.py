@@ -8,6 +8,8 @@ from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
 import urllib.request
 from models.user import User
+from PIL import Image
+from io import BytesIO
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'BCODE_Flask'
@@ -16,10 +18,13 @@ socketio = SocketIO(app)
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 CORS(app)
+temStu_num = ''
+
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
+
 
 @app.route('/static/', methods=['GET', 'POST'])
 def home1():
@@ -70,6 +75,8 @@ def signIn():
             "token": token,
             "user": user
         }
+        global temStu_num
+        temStu_num = stu_num
         print(result)
         return result
 
@@ -77,10 +84,24 @@ def signIn():
         result = {
             "success": False,
             "msg": msg
+
         }
+        print(result)
         return result
 
 
+@app.route("/static/image/decodeImage", methods=['POST'])
+def decode():
+    f = open('file.txt', 'w')
+    f.write(request.get_json().replace('data:image/png;base64,', ''))
+    f.close()
+    f = open('file.txt', 'r')
+    data = f.read()
+    f.closed
+
+    im = Image.open(BytesIO(base64.b64decode(data)))
+    im.save('./student/images/{}.jpg'.format(temStu_num), 'JPG')
+    return "null"
 
 # 로그아웃 로직
 @app.route('/logout')
@@ -93,7 +114,7 @@ def logout():
 # 쿠키 값 확인 로직
 @app.route("/loginstatus")
 def cookie_status():
-    tempstr = request.cookies.get('USERID', '빈문자열')
+    tempstr = request.cookies.get('stu_num', '빈문자열')
     tempstr = tempstr.encode("UTF-8")
 
     return (base64.b64decode(tempstr)).decode('UTF-8')

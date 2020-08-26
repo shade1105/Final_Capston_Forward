@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
-import { WebcamModule } from 'ngx-webcam';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,7 +11,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
-import { ImageCaptureComponent } from './components/image-capture/image-capture.component';
 
 
 import { AuthGuard } from "./guards/auth.guards";
@@ -21,8 +19,8 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
-import { ImageUploadService } from "./services/image-upload.service";
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +29,6 @@ import { RequestAttentionComponent } from './components/request-attention/reques
     HomeComponent,
     SignupComponent,
     SigninComponent,
-    ImageCaptureComponent,
     RequestAttentionComponent
   ],
   imports: [
@@ -40,7 +37,7 @@ import { RequestAttentionComponent } from './components/request-attention/reques
     FlashMessagesModule,
     HttpClientModule,
     FormsModule,
-    WebcamModule,
+
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
@@ -50,7 +47,7 @@ import { RequestAttentionComponent } from './components/request-attention/reques
     })
 
   ],
-  providers: [FlashMessagesService, ValidateService, AuthService, AuthGuard, ImageUploadService],
+  providers: [FlashMessagesService, ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
