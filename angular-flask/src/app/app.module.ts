@@ -21,6 +21,8 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
+import { ImageUploadService } from "./services/image-upload.service";
+import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { AuthService } from "./services/auth.service";
     HomeComponent,
     SignupComponent,
     SigninComponent,
-    ImageCaptureComponent
+    ImageCaptureComponent,
+    RequestAttentionComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ import { AuthService } from "./services/auth.service";
     })
 
   ],
-  providers: [FlashMessagesService, ValidateService, AuthService, AuthGuard],
+  providers: [FlashMessagesService, ValidateService, AuthService, AuthGuard, ImageUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

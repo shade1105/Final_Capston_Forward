@@ -6,6 +6,7 @@ import hashlib
 import base64
 from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
+import urllib.request
 from models.user import User
 
 app = Flask(__name__)
@@ -96,6 +97,13 @@ def cookie_status():
     tempstr = tempstr.encode("UTF-8")
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
+
+
+# 이미지 업로드 로직
+@app.route('/static/users/uploadimage', methods=['GET'])
+def getimage():
+
+    return 0
 
 
 
