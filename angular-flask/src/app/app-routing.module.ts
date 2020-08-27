@@ -7,7 +7,9 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { ActionCamComponent } from "./components/action-cam/action-cam.component";
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
-import { AttenComponent } from './components/atten/atten.component';
+import { AttentionAdminComponent } from './components/attention-admin/attention-admin.component';
+import { AttentionStuComponent } from './components/attention-stu/attention-stu.component';
+import { PictureIndexComponent } from './components/picture-index/picture-index.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: "signin", component: SigninComponent},
   { path: "req-atten", component: RequestAttentionComponent},
   { path: "action-cam", component: ActionCamComponent},
-  { path: "atten", component: AttenComponent}
+  { path: "attention-admin", component: AttentionAdminComponent},
+  { path: "attention-stu", component: AttentionStuComponent},
+  { path: "picture-index", component: PictureIndexComponent}
 ];
 
 @NgModule({

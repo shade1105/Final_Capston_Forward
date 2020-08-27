@@ -8,14 +8,24 @@
 
     <style>
       table { font-family: 'Nanum Myeongjo', serif; }
+      h4 { font-family: 'Noto Serif KR', serif; text-align:center;}
       div { font-family: 'Noto Serif KR', serif; }
+      td {text-align:center;}
+      th {text-align:center;}
+      .tableclass { width:700px; margin-left:auto; margin-right:auto; }
+      .secondtable { width:700px; margin-left:auto; margin-right:auto;}
     </style>
   </head>
 
-  <body>
+<ng-template [ngIf]="checkLoggedIn()">
+  <body class="p-3 mb-2 bg-light text-dark">
     <main role="main">
-      <hr><hr><hr>
-      <div>
+      <br>
+      <div><h2 style="text-align:center">출결 현황</h2></div> <br>
+
+
+
+      <div class="tableclass">
         <table class="table table-bordered">
           <thead>
             <tr class="text-center">
@@ -36,7 +46,8 @@
         </table>
       </div>
 
-      <div>
+
+      <div class="secondtable">
         <table class="table table-hover">
           <thead>
             <tr>
@@ -155,4 +166,22 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
 </body>
+</ng-template>
+
+
+<ng-template [ngIf]="!checkLoggedIn()">
+  <br><br><br>
+  <div style="text-align:center" class="container">
+  <img src="../../../assets/password.png" alt="login" width="200"><br>
+  <h4><span class="text-danger">출결 현황</span>을 확인하시려면 로그인을 해주세요.</h4></div>
+  <br>
+
+
+
+    <div class="col text-center" style="margin-right:auto; margin-left:auto; width:300px;">
+      <button routerLink='/signin' class="btn btn-lg btn-secondary btn-block" value="pleaselogin">로그인하러 가기</button>
+    </div>
+
+
+</ng-template>
 </html>

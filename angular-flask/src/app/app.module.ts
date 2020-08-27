@@ -13,7 +13,6 @@ import { SignupComponent } from './components/signup/signup.component';
 import { SigninComponent } from './components/signin/signin.component';
 import { RequestAttentionComponent } from './components/request-attention/request-attention.component';
 import { ActionCamComponent } from './components/action-cam/action-cam.component';
-import { AttenComponent } from './components/atten/atten.component';
 
 import { AuthGuard } from "./guards/auth.guards";
 import { JwtModule } from "@auth0/angular-jwt";
@@ -21,6 +20,9 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
+import { AttentionAdminComponent } from './components/attention-admin/attention-admin.component';
+import { AttentionStuComponent } from './components/attention-stu/attention-stu.component';
+import { PictureIndexComponent } from './components/picture-index/picture-index.component';
 
 
 
@@ -34,7 +36,9 @@ import { AuthService } from "./services/auth.service";
     SigninComponent,
     RequestAttentionComponent,
     ActionCamComponent,
-    AttenComponent
+    AttentionAdminComponent,
+    AttentionStuComponent,
+    PictureIndexComponent
   ],
   imports: [
     BrowserModule,
