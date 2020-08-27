@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { AuthService } from "../../services/auth.service";
 
 @Component({
   selector: 'app-navbar',
@@ -9,12 +11,26 @@ import { Router } from "@angular/router";
 export class NavbarComponent implements OnInit {
 
   constructor(
-  private router: Router
+  private router: Router,
+  private authService: AuthService,
+  private flashMessage: FlashMessagesService
   ) { }
 
   ngOnInit() {
   }
-
+  onLogoutClick() {
+    this.authService.logout();
+    this.flashMessage.show("Logout", {
+      cssClass: "alert-success",
+      timeout: 3000
+    });
+    this.router.navigate([""]);
+    return false;
+  }
+  //로그인되어있으면 true반환
+  checkLoggedIn() {
+    return this.authService.loggedIn();
+  }
 
 
 }
