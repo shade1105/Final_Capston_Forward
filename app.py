@@ -117,9 +117,22 @@ def decode():
         im.save(imagedir, 'png')
 
     facecsv = face_to_csv()
-    facecsv.makecsv(imagedir, stu_num, name)
+    check = facecsv.makecsv(imagedir, stu_num, name)
 
-    return "null"
+    print(check)
+    if check == True:
+        result = {
+            "success" : True,
+            "msg" : "얼굴 데이터셋 생성 성공"
+        }
+        return result
+
+    elif check == False:
+        result = {
+            "success": False,
+            "msg": "얼굴 데이터셋 생성 실패"
+        }
+        return result
 
 # 로그아웃 로직
 @app.route('/logout')

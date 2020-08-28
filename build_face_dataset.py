@@ -28,5 +28,7 @@ class face_to_csv():
             else:
                 df.to_csv(csvfiledir, index=False, header=None)
 
+            return True
+
         else:
             return False

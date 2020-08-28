@@ -29,13 +29,13 @@ export class SigninComponent implements OnInit {
         this.authService.storeUserData(data.token, data.user);
         this.flashMessage.show(data.msg, {
           cssClass: "alert-success",
-          timeout: 5000
+          timeout: 3000
         });
         this.router.navigate([""]);
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: "alert-danger",
-          timeout: 5000
+          timeout: 3000
         });
         this.router.navigate(["/signin"]);
       }

@@ -6,6 +6,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-action-cam",
@@ -20,7 +22,11 @@ export class ActionCamComponent implements OnInit {
   email: string;
 
 
-  constructor(private renderer: Renderer2, private authService: AuthService) {}
+  constructor(private renderer: Renderer2,
+  private authService: AuthService,
+  private router: Router,
+  private flashMessage: FlashMessagesService
+) {}
   constraints = {
     video: {
       facingMode: "environment",
@@ -81,7 +87,23 @@ export class ActionCamComponent implements OnInit {
     }
     console.log(data)
 
-    this.authService.sendImageDecode(data).subscribe();
+    this.authService.sendImageDecode(data).subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show(data.msg, {
+          cssClass: "alert-success",
+          timeout: 3000
+        });
+        this.router.navigate(["attention-admin"]);
+      } else{
+        this.flashMessage.show(data.msg, {
+          cssClass: "alert-danger",
+          timeout: 3000
+        });
+      }
+
+    });
+
+
   }
 
   ngOnInit() {
