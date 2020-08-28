@@ -9,7 +9,7 @@ class Database():
             host='localhost',
             user='root',
 
-            password='root',
+            password='password',
             db='capston',
             charset='utf8',
             autocommit=True,

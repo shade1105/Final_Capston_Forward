@@ -30,17 +30,8 @@ export class AuthService {
     const loginUrl = this.prepEndpoint("static/users/authenticate");
     return this.http.post(loginUrl, login, httpOptions);
   }
-  getProfile(): Observable<any> {
-    this.authToken = localStorage.getItem("idtoken");
-    const httpOptions1 = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: this.authToken,
-      }),
-    };
-    const profileUrl = this.prepEndpoint("static/users/profile");
-    return this.http.get(profileUrl, httpOptions1);
-  }
+
+
 
   getList(): Observable<any> {
     const listUrl = this.prepEndpoint("static/users/list");
@@ -49,7 +40,7 @@ export class AuthService {
 
   storeUserData(token, userNoPW) {
     localStorage.setItem("idtoken", token);
-    localStorage.setItem("user", userNoPW);
+    localStorage.setItem("user", JSON.stringify(userNoPW));
     this.authToken = token;
     this.userNoPW = userNoPW;
   }
@@ -61,10 +52,10 @@ export class AuthService {
   loggedIn() {
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
-  sendImageDecode(encdoeData): Observable<any> {
+  sendImageDecode(data): Observable<any> {
     const sendImage = this.prepEndpoint("static/image/decodeImage");
 
-    return this.http.post(sendImage, encdoeData, httpOptions);
+    return this.http.post(sendImage, data, httpOptions);
   }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;

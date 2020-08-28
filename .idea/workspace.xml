@@ -19,7 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bd0eb3e-6924-431c-81dd-60e430c8d860" name="Default Changelist" comment="" />
+    <list default="true" id="e834dbec-c514-4994-8469-7a6412db34b7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Final_Capston_Angular.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Final_Capston_Angular.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student/images/91514672.jpg" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -43,23 +50,23 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda3/envs/Final_Capston_Forward/pythonw.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/angular-flask/src/assets" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\assets" />
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app\components\image-capture" />
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app" />
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask" />
-      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\assets" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\static" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask" />
       <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\assets" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app\components\image-capture" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask\src\app" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\angular-flask" />
+      <recent name="F:\Program Files (x86)\JetBrains\sources\Final_Capston_Angular\templates" />
     </key>
   </component>
   <component name="RunManager" selected="Python.app">
@@ -130,12 +137,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="663" y="138" key="#app" timestamp="1598432916733">
@@ -151,30 +159,30 @@
     </state>
     <state x="1275" y="337" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598520023314" />
     <state x="1700" y="454" key="FileChooserDialogImpl/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598353049618" />
-    <state width="1250" height="340" key="GridCell.Tab.0.bottom" timestamp="1598511723729">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="970" height="238" key="GridCell.Tab.0.bottom" timestamp="1598633353863">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1250" height="340" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1598511723729" />
     <state width="1014" height="324" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1598420796775" />
-    <state width="1007" height="239" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598428362771" />
-    <state width="1250" height="340" key="GridCell.Tab.0.center" timestamp="1598511723729">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="970" height="238" key="GridCell.Tab.0.bottom/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598633353863" />
+    <state width="970" height="238" key="GridCell.Tab.0.center" timestamp="1598633353863">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1250" height="340" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1598511723729" />
     <state width="1014" height="324" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1598420796775" />
-    <state width="1007" height="239" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598428362770" />
-    <state width="1250" height="340" key="GridCell.Tab.0.left" timestamp="1598511723729">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="970" height="238" key="GridCell.Tab.0.center/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598633353863" />
+    <state width="970" height="238" key="GridCell.Tab.0.left" timestamp="1598633353863">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1250" height="340" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1598511723729" />
     <state width="1014" height="324" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1598420796775" />
-    <state width="1007" height="239" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598428362770" />
-    <state width="1250" height="340" key="GridCell.Tab.0.right" timestamp="1598511723729">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="970" height="238" key="GridCell.Tab.0.left/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598633353863" />
+    <state width="970" height="238" key="GridCell.Tab.0.right" timestamp="1598633353863">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1250" height="340" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1598511723729" />
     <state width="1014" height="324" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@-2560.0.2560.1400" timestamp="1598420796775" />
-    <state width="1007" height="239" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598428362771" />
+    <state width="970" height="238" key="GridCell.Tab.0.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598633353863" />
     <state width="1256" height="488" key="GridCell.Tab.1.bottom" timestamp="1597931643726">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
@@ -191,19 +199,19 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state width="1256" height="488" key="GridCell.Tab.1.right/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1597931643726" />
-    <state x="-139" y="35" width="998" height="709" key="SettingsEditor" timestamp="1598453624691">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="1421" y="341" width="998" height="709" key="SettingsEditor" timestamp="1598632807078">
+      <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="-139" y="35" width="998" height="709" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1598453624691" />
-    <state x="1421" y="341" key="SettingsEditor/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598171697596" />
+    <state x="1421" y="341" key="SettingsEditor/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598632807078" />
     <state x="1612" y="523" key="com.intellij.ide.util.TipDialog" timestamp="1598337106324">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1612" y="523" key="com.intellij.ide.util.TipDialog/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598337106324" />
-    <state x="417" y="193" width="958" height="1083" key="dock-window-1" timestamp="1598294761330">
+    <state x="1277" y="6" width="862" height="1050" key="dock-window-1" timestamp="1598633270404">
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
-    <state x="417" y="193" width="958" height="1083" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598294761330" />
+    <state x="1277" y="6" width="862" height="1050" key="dock-window-1/0.0.2560.1400/-2560.0.2560.1400@0.0.2560.1400" timestamp="1598633270404" />
     <state x="-653" y="319" width="958" height="1026" key="dock-window-2" timestamp="1598119161451">
       <screen x="-2560" y="0" width="2560" height="1400" />
     </state>

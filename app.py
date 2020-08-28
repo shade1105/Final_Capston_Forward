@@ -1,24 +1,25 @@
-from flask import Flask, render_template, jsonify, json, redirect, Response, request
+from flask import Flask, render_template, jsonify, request, json, redirect, Response
 from flask_cors import CORS
 from flask_socketio import SocketIO
-from flask_jwt_extended import JWTManager, create_access_token
-import hashlib
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import base64
 from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
-from models.user import User
 from PIL import Image
 from io import BytesIO
+import os
+from datetime import datetime
+import ast
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'BCODE_Flask'
+app.config['JWT_SECRET_KEY'] = 'super-secrete'
 socketio = SocketIO(app)
 
 jwt = JWTManager(app)
 bcrypt = Bcrypt(app)
 
 CORS(app)
-temStu_num = ''
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -41,7 +42,6 @@ def register():
         'email': request.get_json()['email'],
         'password': bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     }
-    result = ""
     db = Signdatabase()
     msg = db.register(User)
     if msg == True:
@@ -75,9 +75,7 @@ def signIn():
             "token": token,
             "user": user
         }
-        global temStu_num
-        temStu_num = stu_num
-        print(result)
+
         return result
 
     else:
@@ -90,17 +88,30 @@ def signIn():
         return result
 
 
+
 @app.route("/static/image/decodeImage", methods=['POST'])
 def decode():
+    user = ast.literal_eval(request.get_json()['user'])
+    stu_num = user.get('stu_num')
+    name = user.get('name')
+
     f = open('file.txt', 'w')
-    f.write(request.get_json().replace('data:image/png;base64,', ''))
+    image = request.get_json()['image'].replace('data:image/png;base64,', '')
+    f.write(image)
     f.close()
     f = open('file.txt', 'r')
     data = f.read()
     f.closed
 
     im = Image.open(BytesIO(base64.b64decode(data)))
-    im.save('./student/images/{}.jpg'.format(temStu_num), 'png')
+
+    if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
+        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
+        im.save('students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg', 'png')
+    else:
+        os.mkdir('students/' + str(stu_num) + '_' + name)
+        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
+        im.save('students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg', 'png')
     return "null"
 
 # 로그아웃 로직

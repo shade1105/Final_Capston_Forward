@@ -15,6 +15,10 @@ import { AuthService } from "../../services/auth.service";
 export class ActionCamComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
   @ViewChild("canvas", { static: true }) canvas: ElementRef;
+  stu_num: number;
+  name: string;
+  email: string;
+
 
   constructor(private renderer: Renderer2, private authService: AuthService) {}
   constraints = {
@@ -68,10 +72,16 @@ export class ActionCamComponent implements OnInit {
   }
 
   saveas() {
-    var encdoeImage = this.canvas.nativeElement.toDataURL("image/png");
+    var encodeImage = this.canvas.nativeElement.toDataURL("image/png");
 
-    const jsonEncodeImage = JSON.stringify(encdoeImage);
-    this.authService.sendImageDecode(jsonEncodeImage).subscribe();
+    const jsonEncodeImage = JSON.stringify(encodeImage);
+    const data = {
+    user: localStorage.getItem('user'),
+    'image': JSON.stringify(encodeImage)
+    }
+    console.log(data)
+
+    this.authService.sendImageDecode(data).subscribe();
   }
 
   ngOnInit() {

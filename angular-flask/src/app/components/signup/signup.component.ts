@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
           cssClass: "alert-danger",
           timeout: 3000
         });
-        this.router.navigate(["/signup"]);
+        this.router.navigate(["/action-cam"]);
       }
     });
 
