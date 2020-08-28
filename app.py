@@ -3,13 +3,15 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 import base64
-from sitable import Signdatabase
 from flask_bcrypt import Bcrypt
 from PIL import Image
 from io import BytesIO
 import os
 from datetime import datetime
 import ast
+
+from sitable import Signdatabase
+from build_face_dataset import face_to_csv
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'BCODE_Flask'
@@ -95,6 +97,7 @@ def decode():
     stu_num = user.get('stu_num')
     name = user.get('name')
 
+
     f = open('file.txt', 'w')
     image = request.get_json()['image'].replace('data:image/png;base64,', '')
     f.write(image)
@@ -104,14 +107,18 @@ def decode():
     f.closed
 
     im = Image.open(BytesIO(base64.b64decode(data)))
+    time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
+    imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
 
     if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
-        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
-        im.save('students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg', 'png')
+        im.save(imagedir, 'png')
     else:
         os.mkdir('students/' + str(stu_num) + '_' + name)
-        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
-        im.save('students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg', 'png')
+        im.save(imagedir, 'png')
+
+    facecsv = face_to_csv()
+    facecsv.makecsv(imagedir, stu_num, name)
+
     return "null"
 
 # 로그아웃 로직
