@@ -9,9 +9,11 @@ from io import BytesIO
 import os
 from datetime import datetime
 import ast
+import numpy as np
+import cv2
 
 from sitable import Signdatabase
-from build_face_dataset import face_to_csv
+from face import face_function
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'BCODE_Flask'
@@ -106,33 +108,60 @@ def decode():
     data = f.read()
     f.closed
 
+    #PIL image
     im = Image.open(BytesIO(base64.b64decode(data)))
-    time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
-    imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
 
-    if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
-        im.save(imagedir, 'png')
+    #PIL to cv2
+    cv2_image = np.array(im.convert('RGB'))
+    cv2_image = cv2_image[:,:,::-1].copy()
+
+    #import face_function module
+    ff = face_function()
+    #check face number of picutre
+    if ff.check_face_num(cv2_image) == True:
+
+
+        #save face as csv
+        check = ff.registerimage(cv2_image, stu_num, name)
+
+        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
+        imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
+
+        #얼굴 인식 확인 및 이미지 저장
+        if check == True:
+            if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
+                im.save(imagedir, 'png')
+            else:
+                os.mkdir('students/' + str(stu_num) + '_' + name)
+                im.save(imagedir, 'png')
+
+            result = {
+                "success": True,
+                "msg": "얼굴 데이터셋 생성 성공"
+            }
+            return result
+
+        elif check == False:
+            result = {
+                "success": False,
+                "msg": "얼굴 인식이 실패하였습니다"
+            }
+            return result
+
     else:
-        os.mkdir('students/' + str(stu_num) + '_' + name)
-        im.save(imagedir, 'png')
-
-    facecsv = face_to_csv()
-    check = facecsv.makecsv(imagedir, stu_num, name)
-
-    print(check)
-    if check == True:
-        result = {
-            "success" : True,
-            "msg" : "얼굴 데이터셋 생성 성공"
-        }
-        return result
-
-    elif check == False:
         result = {
             "success": False,
-            "msg": "얼굴 데이터셋 생성 실패"
+            "msg": "얼굴이 인식되지 않았거나 두개 이상입니다"
         }
-        return result
+        return  result
+
+
+
+
+
+
+
+
 
 # 로그아웃 로직
 @app.route('/logout')

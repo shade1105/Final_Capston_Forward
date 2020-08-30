@@ -66,13 +66,13 @@ export class SignupComponent implements OnInit {
           cssClass: "alert-success",
           timeout: 3000
         });
-        this.router.navigate(["/signin"]);
+        this.router.navigate(["/action-cam"]);
       } else {
         this.flashMessage.show(data.msg, {
           cssClass: "alert-danger",
           timeout: 3000
         });
-        this.router.navigate(["/action-cam"]);
+        this.router.navigate(["/signup"]);
       }
     });
 

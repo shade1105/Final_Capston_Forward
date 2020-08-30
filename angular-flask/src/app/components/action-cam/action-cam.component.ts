@@ -85,7 +85,6 @@ export class ActionCamComponent implements OnInit {
     user: localStorage.getItem('user'),
     'image': JSON.stringify(encodeImage)
     }
-    console.log(data)
 
     this.authService.sendImageDecode(data).subscribe(data => {
       if (data.success) {
