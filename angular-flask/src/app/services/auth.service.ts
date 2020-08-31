@@ -31,8 +31,6 @@ export class AuthService {
     return this.http.post(loginUrl, login, httpOptions);
   }
 
-
-
   getList(): Observable<any> {
     const listUrl = this.prepEndpoint("static/users/list");
     return this.http.get(listUrl, httpOptions);
