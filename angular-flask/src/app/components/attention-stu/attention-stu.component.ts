@@ -29,18 +29,28 @@ export class AttentionStuComponent implements OnInit {
     new Attention(11, "2020.11.22", "ON"),
     new Attention(12, "2020.11.23", "ON"),
   ];
+
   ngOnInit(): void {}
   clicked(number) {
     console.log(document.getElementById("tty"));
-    var asd ;
+    var asd;
+    var dsd;
+    var usernum;
+    var username;
+    dsd = localStorage.getItem("user");
     asd = this.Attentionlist[number - 1].date;
     console.log(this.Attentionlist[number - 1].date);
-    this.fullImagePath = '../../../assets/students/123_bcbc/ㅇ.jpg'.replace("ㅇ",asd);
-    console.log(this.fullImagePath)
+    usernum = JSON.parse(dsd).stu_num;
+    username = JSON.parse(dsd).name;
+    this.fullImagePath = "../../../assets/students/ㅇ.jpg".replace(
+      "ㅇ",
+      usernum + "_" + username + "/" + asd
+    );
+    console.log(this.fullImagePath);
+
+    // TODO 로그인 아이디 값만 가져오면된다 아이디값만 제에에에바아아알!! ! ! ! !
   }
   checkLoggedIn() {
     return this.authService.loggedIn();
   }
-  
 }
-
