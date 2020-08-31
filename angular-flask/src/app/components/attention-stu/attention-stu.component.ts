@@ -48,7 +48,6 @@ export class AttentionStuComponent implements OnInit {
     );
     console.log(this.fullImagePath);
 
-    // TODO 로그인 아이디 값만 가져오면된다 아이디값만 제에에에바아아알!! ! ! ! !
   }
   checkLoggedIn() {
     return this.authService.loggedIn();
