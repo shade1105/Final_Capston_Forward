@@ -120,21 +120,18 @@ def decode():
     #check face number of picutre
     if ff.check_face_num(cv2_image) == True:
 
-
+        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
+        imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
+        if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
+            pass
+        else:
+            os.mkdir('students/' + str(stu_num) + '_' + name)
         #save face as csv
         check = ff.registerimage(cv2_image, stu_num, name)
 
-        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
-        imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
-
-        #얼굴 인식 확인 및 이미지 저장
+            #얼굴 인식 확인 및 이미지 저장
         if check == True:
-            if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
-                im.save(imagedir, 'png')
-            else:
-                os.mkdir('students/' + str(stu_num) + '_' + name)
-                im.save(imagedir, 'png')
-
+            im.save(imagedir, 'png')
             result = {
                 "success": True,
                 "msg": "얼굴 데이터셋 생성 성공"
@@ -147,6 +144,8 @@ def decode():
                 "msg": "얼굴 인식이 실패하였습니다"
             }
             return result
+
+
 
     else:
         result = {

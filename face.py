@@ -19,6 +19,7 @@ class face_function():
             df = pd.DataFrame(face_encodings)
 
             csvfiledir = "students/" + str(stu_num) + "_" + name + "/" + "captured_feature_data.csv"
+            print(csvfiledir)
             # 파일이 이미 존재한다면
             if (os.path.isfile(csvfiledir)):
                 countA = 0
