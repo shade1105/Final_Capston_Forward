@@ -15,6 +15,7 @@ export class AttentionStuComponent implements OnInit {
     private flashMessage: FlashMessagesService
   ) {}
   fullImagePath: string;
+  converted_image: string;
   Attentionlist = [
     new Attention(1, "2020.8.30", "On"),
     new Attention(2, "2020.11.11", "ON"),
@@ -30,9 +31,9 @@ export class AttentionStuComponent implements OnInit {
     new Attention(12, "2020.11.23", "ON"),
   ];
 
+  //출결 , 날짜, 주차 , 이미지 (GET , POST )
   ngOnInit(): void {}
   clicked(number) {
-    console.log(document.getElementById("tty"));
     var asd;
     var dsd;
     var usernum;
@@ -42,14 +43,15 @@ export class AttentionStuComponent implements OnInit {
     console.log(this.Attentionlist[number - 1].date);
     usernum = JSON.parse(dsd).stu_num;
     username = JSON.parse(dsd).name;
-    this.fullImagePath = "../../../assets/students/ㅇ.jpg".replace(
-      "ㅇ",
-      usernum + "_" + username + "/" + asd
-    );
-    console.log(this.fullImagePath);
-
-
+    var cdcd;
+    this.authService
+      .getImageEncdoe(usernum, username, asd)
+      .subscribe((data) => {
+        cdcd = data["msg"];
+        this.converted_image = "data:image/jpeg;base64," + cdcd;
+      });
   }
+
   checkLoggedIn() {
     return this.authService.loggedIn();
   }
