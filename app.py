@@ -152,7 +152,7 @@ def decode():
             "success": False,
             "msg": "얼굴이 인식되지 않았거나 두개 이상입니다"
         }
-        return  result
+        return result
 
 
 
