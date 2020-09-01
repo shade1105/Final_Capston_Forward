@@ -92,7 +92,7 @@ export class ActionCamComponent implements OnInit {
           cssClass: "alert-success",
           timeout: 3000
         });
-        this.router.navigate(["attention-admin"]);
+        this.router.navigate(["attention-stu"]);
       } else{
         this.flashMessage.show(data.msg, {
           cssClass: "alert-danger",

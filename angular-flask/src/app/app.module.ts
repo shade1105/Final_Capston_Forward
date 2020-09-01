@@ -46,7 +46,6 @@ import { PictureIndexComponent } from './components/picture-index/picture-index.
     FlashMessagesModule,
     HttpClientModule,
     FormsModule,
-
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
