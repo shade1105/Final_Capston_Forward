@@ -92,13 +92,11 @@ def signIn():
         return result
 
 
-
 @app.route("/static/image/decodeImage", methods=['POST'])
 def decode():
     user = ast.literal_eval(request.get_json()['user'])
     stu_num = user.get('stu_num')
     name = user.get('name')
-
 
     f = open('file.txt', 'w')
     image = request.get_json()['image'].replace('data:image/png;base64,', '')
@@ -108,28 +106,39 @@ def decode():
     data = f.read()
     f.closed
 
-    #PIL image
+    # PIL image
     im = Image.open(BytesIO(base64.b64decode(data)))
 
-    #PIL to cv2
+    # PIL to cv2
     cv2_image = np.array(im.convert('RGB'))
-    cv2_image = cv2_image[:,:,::-1].copy()
+    cv2_image = cv2_image[:, :, ::-1].copy()
 
-    #import face_function module
+    # import face_function module
     ff = face_function()
-    #check face number of picutre
+    # check face number of picutre
     if ff.check_face_num(cv2_image) == True:
 
-        time_today = str(datetime.now().year) + "." + str(datetime.now().month) + "." + str(datetime.now().day)
-        imagedir = 'students/' + str(stu_num) + '_' + name + '/' + time_today + '.jpg'
+        time_today = str(datetime.now().year) + "." + \
+            str(datetime.now().month) + "." + str(datetime.now().day)
+        imagedir = 'students/' + str(stu_num) + \
+            '_' + name + '/' + time_today + '.jpg'
         if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
             pass
         else:
             os.mkdir('students/' + str(stu_num) + '_' + name)
-        #save face as csv
+        # save face as csv
         check = ff.registerimage(cv2_image, stu_num, name)
 
-            #얼굴 인식 확인 및 이미지 저장
+        # 얼굴 인식 확인 및 이미지 저장
+        # save face as csv
+        check = ff.registerimage(cv2_image, stu_num, name)
+
+        time_today = str(datetime.now().year) + "." + \
+            str(datetime.now().month) + "." + str(datetime.now().day)
+        imagedir = 'students/' + str(stu_num) + \
+            '_' + name + '/' + time_today + '.jpg'
+
+        # 얼굴 인식 확인 및 이미지 저장
         if check == True:
             im.save(imagedir, 'png')
             result = {
@@ -145,8 +154,6 @@ def decode():
             }
             return result
 
-
-
     else:
         result = {
             "success": False,
@@ -155,11 +162,29 @@ def decode():
         return result
 
 
+@app.route("/static/image/encode/send", methods=["POST", "GET"])
+def imgSend():
+    if request.method == "POST":
+        name = request.get_json()[0]['name']
+        stu_num = request.get_json()[0]['stu_num']
+        date = request.get_json()[0]['date']
+        try:
+            result = {
+                "msg": imgencode(name, stu_num, date).decode('utf-8')
+            }
+            return result
+        except:
+            result = {
+                "msg": None
+            }
+            return result
 
 
+def imgencode(name, stu_num, date):
+    with open("./students/{}_{}/{}.jpg".format(stu_num, name, date), "rb") as img_file:
+        my_string = base64.b64encode(img_file.read())
 
-
-
+    return my_string
 
 
 # 로그아웃 로직

@@ -55,6 +55,18 @@ export class AuthService {
 
     return this.http.post(sendImage, data, httpOptions);
   }
+  getImageEncdoe(usernum, username, date): Observable<any> {
+    const getEncodeImage = this.prepEndpoint("/static/image/encode/send");
+    const data = [
+      {
+        stu_num: usernum,
+        name: username,
+        date: date,
+      },
+    ];
+
+    return this.http.post(getEncodeImage, data, httpOptions);
+  }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;
     //return ep;
