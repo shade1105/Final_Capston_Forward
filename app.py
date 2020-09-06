@@ -11,7 +11,7 @@ from datetime import datetime
 import ast
 import numpy as np
 import cv2
-
+import datetime
 from sitable import Signdatabase
 from face import face_function
 
@@ -203,6 +203,49 @@ def cookie_status():
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
 
+# 과목생성로직
+# TODO 변수변경 및 재설계 요구
+@app.route("/attend", methods=["GET"])
+def atten():
+    db = Signdatabase()
+    a, b, c = map(int, '2020,08,25'.split(','))
+    for i in range(16):
+        d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
+        attend = {
+            'stu_num': 91514892,
+            'week': i+1,
+            'atten_date': d.strftime('%Y-%m-%d'),
+            'atten': "None"
+        }
 
-if __name__ == '__main__':
-    socketio.run(app, port=9999, debug=True)
+        db.attendInsert(attend)
+    return "S"
+
+# 과목 조회
+@app.route("/static/subject/info", methods=["POST"])
+def subject_info():
+
+    db = Signdatabase()
+    temp = db.get_subjectInfo(request.get_json()['stu_num'])
+    result = {
+        'msg': temp
+    }
+    return result
+
+
+def subject_index():
+    a, b, c = map(int, input().split(','))
+    for i in range(16):
+        d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
+        print(d.strftime('%Y-%m-%d'))
+
+# 출석 알고리즘
+# TODO 출결알고리즘에서 값을 가져와서 처리하는 로직 필요
+@app.route("/static/ssd", methods=["GET"])
+def attendance_check():
+    db = Signdatabase()
+    db.update_atten(91514892, 2, "ON")
+    return "UPDATE ON "
+
+
+socketio.run(app, port=9999, debug=True)

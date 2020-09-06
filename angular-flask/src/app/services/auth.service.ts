@@ -67,6 +67,11 @@ export class AuthService {
 
     return this.http.post(getEncodeImage, data, httpOptions);
   }
+  getSubjectData(user): Observable<any> {
+    const getSubjectURL = this.prepEndpoint("static/subject/info");
+    
+    return this.http.post(getSubjectURL, user, httpOptions);
+  }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;
     //return ep;

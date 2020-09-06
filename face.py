@@ -72,7 +72,7 @@ class face_function():
 
                             face_distances = face_recognition.face_distance(face_feature, face_encodings)
                             print(face_distances)
-                            if face_distances<0.2:
+                            if face_distances<0.3:
                                 df.to_csv(csvfiledir, mode='a', index=False, header=None)
                                 break
                             else:
