@@ -16,23 +16,8 @@ export class AttentionStuComponent implements OnInit {
   ) {}
   fullImagePath: string;
   converted_image: string;
-  Attentionlist = [
-    new Attention(1, "2020.8.30", "On"),
-    new Attention(2, "2020.11.11", "ON"),
-    new Attention(3, "2020.11.14", "OFF"),
-    new Attention(4, "2020.11.15", "ON"),
-    new Attention(5, "2020.11.16", "ON"),
-    new Attention(6, "2020.11.17", "ON"),
-    new Attention(7, "2020.11.18", "ON"),
-    new Attention(8, "2020.11.9", "ON"),
-    new Attention(9, "2020.11.20", "ON"),
-    new Attention(10, "2020.11.21", "ON"),
-    new Attention(11, "2020.11.22", "ON"),
-    new Attention(12, "2020.11.23", "ON"),
-  ];
+  Attentionlist = [];
 
-  //출결 , 날짜, 주차 , 이미지 (GET , POST )
-  ngOnInit(): void {}
   clicked(number) {
     var asd;
     var dsd;
@@ -54,5 +39,25 @@ export class AttentionStuComponent implements OnInit {
 
   checkLoggedIn() {
     return this.authService.loggedIn();
+  }
+  ngOnInit() {
+    var msg;
+    this.authService
+      .getSubjectData(localStorage.getItem("user"))
+      .subscribe((data) => {
+        msg = data["msg"];
+        for (var i = 0; i < msg.length; i++) {
+          var date_form = new Date(msg[i].atten_date);
+          var date_str =
+            date_form.getFullYear().toString() +
+            "." +
+            (date_form.getMonth() + 1).toString() +
+            "." +
+            date_form.getDate().toString();
+          this.Attentionlist.push(
+            new Attention(msg[i].stu_num, msg[i].week, date_str, msg[i].atten)
+          );
+        }
+      });
   }
 }
