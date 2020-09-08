@@ -69,8 +69,18 @@ export class AuthService {
   }
   getSubjectData(user): Observable<any> {
     const getSubjectURL = this.prepEndpoint("static/subject/info");
-    
+
     return this.http.post(getSubjectURL, user, httpOptions);
+  }
+  postAttendData(week, usernum): Observable<any> {
+    const postAttendDataURL = this.prepEndpoint("static/atten/attend");
+    const data = [
+      {
+        stu_num: usernum,
+        week: week,
+      },
+    ];
+    return this.http.post(postAttendDataURL, data, httpOptions);
   }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;

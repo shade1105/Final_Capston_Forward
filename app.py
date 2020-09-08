@@ -11,7 +11,6 @@ from datetime import datetime
 import ast
 import numpy as np
 import cv2
-import datetime
 from sitable import Signdatabase
 from face import face_function
 
@@ -46,6 +45,7 @@ def register():
         'email': request.get_json()['email'],
         'password': bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     }
+    atten(User.get('stu_num'))
     db = Signdatabase()
     msg = db.register(User)
     if msg == True:
@@ -203,23 +203,22 @@ def cookie_status():
 
     return (base64.b64decode(tempstr)).decode('UTF-8')
 
-# 과목생성로직
-# TODO 변수변경 및 재설계 요구
-@app.route("/attend", methods=["GET"])
-def atten():
+
+def atten(stunum):
     db = Signdatabase()
-    a, b, c = map(int, '2020,08,25'.split(','))
+    a, b, c, f = map(int, '2020,08,25,11'.split(','))
+    import datetime
     for i in range(16):
-        d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
+        d = datetime.datetime(a, b, c, f)+datetime.timedelta(weeks=i)
         attend = {
-            'stu_num': 91514892,
+            'stu_num': stunum,
             'week': i+1,
-            'atten_date': d.strftime('%Y-%m-%d'),
+            'atten_date': d.strftime('%Y-%m-%d %H'),
             'atten': "None"
         }
 
         db.attendInsert(attend)
-    return "S"
+
 
 # 과목 조회
 @app.route("/static/subject/info", methods=["POST"])
@@ -239,13 +238,32 @@ def subject_index():
         d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
         print(d.strftime('%Y-%m-%d'))
 
-# 출석 알고리즘
-# TODO 출결알고리즘에서 값을 가져와서 처리하는 로직 필요
-@app.route("/static/ssd", methods=["GET"])
+
+@app.route("/static/atten/attend", methods=["POST"])
 def attendance_check():
+    data = request.get_json()[0]
+    stu_num = data['stu_num']
+    week = data['week']
     db = Signdatabase()
-    db.update_atten(91514892, 2, "ON")
+    # attend_update 로직 필요
+    db.update_atten(stu_num, week, atten_update(True))
     return "UPDATE ON "
+
+
+def atten_update(face_data):
+    import datetime
+    if face_data == True:
+        db = Signdatabase()
+        bc = db.temp()
+        bc = bc['atten_date']
+        cutline = datetime.datetime.now()-bc
+        print(cutline)
+        if cutline < datetime.timedelta(hours=2):
+            return "출석"
+        elif cutline > datetime.timedelta(hours=2):
+            return "지각"
+    elif face_data == False:
+        return "결석"
 
 
 socketio.run(app, port=9999, debug=True)

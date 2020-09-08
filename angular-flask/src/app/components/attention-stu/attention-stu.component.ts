@@ -40,6 +40,16 @@ export class AttentionStuComponent implements OnInit {
   checkLoggedIn() {
     return this.authService.loggedIn();
   }
+  clickevent(number) {
+    var dsd;
+    var usernum;
+    var asd;
+    dsd = localStorage.getItem("user");
+    usernum = JSON.parse(dsd).stu_num;
+    asd = this.Attentionlist[number - 1].week;
+    this.authService.postAttendData(asd, usernum).subscribe();
+    // 새로고침 로직 요구
+  }
   ngOnInit() {
     var msg;
     this.authService

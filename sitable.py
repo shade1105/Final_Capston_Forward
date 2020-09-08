@@ -70,11 +70,16 @@ class Signdatabase(Database):
     def update_atten(self, stu_num, week, atten):
         sql = 'UPDATE attend SET atten = "{}" '.format(atten)
         sql += 'WHERE (WEEK={} AND stu_num={}) '.format(week, stu_num)
-
+        print(sql)
         try:
             result = self.executeOne(sql)
             self.db.commit()
         except Exception as e:
             result = e
 
+        return result
+
+    def temp(self):
+        sql = 'SELECT atten_date FROM attend WHERE stu_num = 44445 AND WEEK = 1 '
+        result = self.executeOne(sql)
         return result
