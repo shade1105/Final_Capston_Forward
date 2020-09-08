@@ -79,7 +79,11 @@ class Signdatabase(Database):
 
         return result
 
-    def temp(self):
-        sql = 'SELECT atten_date FROM attend WHERE stu_num = 44445 AND WEEK = 1 '
-        result = self.executeOne(sql)
+    def get_subject_date(self, stu_num, week):
+        sql = 'SELECT atten_date FROM attend WHERE stu_num = {} AND WEEK = {} '.format(
+            stu_num, week)
+        try:
+            result = self.executeOne(sql)
+        except Exception as e:
+            result = e
         return result

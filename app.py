@@ -246,15 +246,15 @@ def attendance_check():
     week = data['week']
     db = Signdatabase()
     # attend_update 로직 필요
-    db.update_atten(stu_num, week, atten_update(True))
+    db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
 
-def atten_update(face_data):
+def atten_update(face_data, stu_num, week):
     import datetime
     if face_data == True:
         db = Signdatabase()
-        bc = db.temp()
+        bc = db.get_subject_date(stu_num, week)
         bc = bc['atten_date']
         cutline = datetime.datetime.now()-bc
         print(cutline)
