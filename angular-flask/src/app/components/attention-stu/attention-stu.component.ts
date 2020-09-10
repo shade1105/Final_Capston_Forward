@@ -48,7 +48,7 @@ export class AttentionStuComponent implements OnInit {
     usernum = JSON.parse(dsd).stu_num;
     asd = this.Attentionlist[number - 1].week;
     this.authService.postAttendData(asd, usernum).subscribe();
-    // 새로고침 로직 요구
+    location.reload();
   }
   ngOnInit() {
     var msg;
