@@ -25,9 +25,18 @@ export class AuthService {
     const registerUrl = this.prepEndpoint("static/users/register");
     return this.http.post(registerUrl, user, httpOptions);
   }
+  registerAdmin(user): Observable<any> {
+    const registerUrl = this.prepEndpoint("static/admins/register");
+    return this.http.post(registerUrl, user, httpOptions);
+  }
 
   authenticateUser(login): Observable<any> {
     const loginUrl = this.prepEndpoint("static/users/authenticate");
+    return this.http.post(loginUrl, login, httpOptions);
+  }
+
+   authenticateAdmin(login): Observable<any> {
+    const loginUrl = this.prepEndpoint("static/admin/authenticateAdmin");
     return this.http.post(loginUrl, login, httpOptions);
   }
 
@@ -50,9 +59,26 @@ export class AuthService {
   loggedIn() {
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
+  rootloggedIn(){
+    //루트 로그인 확인 알고리즘 추가필요
+    return !this.jwtHelper.isTokenExpired(this.authToken);
+  }
+
+  checkadmin(){
+    this.authToken = localStorage.getItem('idtoken')
+    const httOptions1 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer "+this.authToken
+      })
+    }
+    const checkingUrl = this.prepEndpoint("static/admin/check");
+    return this.http.get(checkingUrl, httOptions1)
+  }
+
+
   sendImageDecode(data): Observable<any> {
     const sendImage = this.prepEndpoint("static/image/decodeImage");
-
     return this.http.post(sendImage, data, httpOptions);
   }
   getImageEncdoe(usernum, username, date): Observable<any> {

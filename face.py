@@ -47,8 +47,6 @@ class face_function():
                 face_locations = face_recognition.face_locations(cv2image)
                 face_encodings = face_recognition.face_encodings(cv2image, face_locations)
                 face_encodings = np.asarray(face_encodings)
-                print('face encoding', face_encodings)
-
 
                 ## 특징값 저장
                 df = pd.DataFrame(face_encodings)
@@ -64,14 +62,12 @@ class face_function():
                         reader = csv.reader(csvfile, delimiter=',')
 
                         for row in reader:
-                            print('countA', countA)
-                            print('countB', countB)
 
                             countA = countA+1
                             face_feature = list(map(float, row))
 
                             face_distances = face_recognition.face_distance(face_feature, face_encodings)
-                            print(face_distances)
+                            print('저장된 데이터와 ', 100-(face_distances*100), '% 일치합니다.')
                             if face_distances<0.2:
                                 df.to_csv(csvfiledir, mode='a', index=False, header=None)
                                 break
@@ -99,13 +95,12 @@ class face_function():
             face_locations = face_recognition.face_locations(cv2_image)
 
             if len(face_locations) == 1:
-                print(face_locations)
+                print('이미지 얼굴 좌표 :', face_locations)
                 return True
             else:
                 return False
 
     def apply_brightness_contrast(self, input_img, brightness=0, contrast=0):
-
         if brightness != 0:
             if brightness > 0:
                 shadow = brightness
@@ -115,16 +110,12 @@ class face_function():
                 highlight = 255 + brightness
             alpha_b = (highlight - shadow) / 255
             gamma_b = shadow
-
             buf = cv2.addWeighted(input_img, alpha_b, input_img, 0, gamma_b)
         else:
             buf = input_img.copy()
-
         if contrast != 0:
             f = 131 * (contrast + 127) / (127 * (131 - contrast))
             alpha_c = f
             gamma_c = 127 * (1 - f)
-
             buf = cv2.addWeighted(buf, alpha_c, buf, 0, gamma_c)
-
         return buf

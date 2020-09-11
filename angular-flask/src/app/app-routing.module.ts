@@ -10,6 +10,8 @@ import { RequestAttentionComponent } from './components/request-attention/reques
 import { AttentionAdminComponent } from './components/attention-admin/attention-admin.component';
 import { AttentionStuComponent } from './components/attention-stu/attention-stu.component';
 import { PictureIndexComponent } from './components/picture-index/picture-index.component';
+import { SigninAdminComponent } from './components/signin-admin/signin-admin.component';
+import { SignupAdminComponent } from './components/signup-admin/signup-admin.component';
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -20,7 +22,9 @@ const routes: Routes = [
   { path: "action-cam", component: ActionCamComponent},
   { path: "attention-admin", component: AttentionAdminComponent},
   { path: "attention-stu", component: AttentionStuComponent},
-  { path: "picture-index", component: PictureIndexComponent}
+  { path: "picture-index", component: PictureIndexComponent},
+  { path: "signin-admin", component: SigninAdminComponent},
+  { path: "signup-admin", component: SignupAdminComponent}
 ];
 
 @NgModule({

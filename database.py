@@ -8,7 +8,6 @@ class Database():
         self.db = pymysql.connect(
             host='localhost',
             user='root',
-
             password='password',
             db='capston',
             charset='utf8',

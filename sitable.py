@@ -20,6 +20,19 @@ class Signdatabase(Database):
 
         return result
 
+    def registeradmin(self, Admin):
+        sql = "INSERT INTO admin(admin_num, password)"
+        sql += " VALUES('{}','{}');".format(Admin.get('admin_num'), Admin.get('password'))
+
+        try:
+            self.cursor.execute(sql)
+            self.db.commit()
+            result = True
+        except Exception as e:
+            result = {"error": "{}".format(e)}
+
+        return result
+
 
     def login(self, stu_num, password):
         sql = "SELECT stu_num, password "
@@ -45,3 +58,26 @@ class Signdatabase(Database):
         except Exception as e:
             return {"error": "{}".format(e)}
         return user
+
+    def loginadmin(self, admin_num, password):
+        sql = "SELECT admin_num, password "
+        sql += "From admin "
+        sql += "WHERE admin_num='{}';".format(admin_num)
+        try:
+            saved_pass = self.executeOne(sql)
+            if bcrypt.check_password_hash(saved_pass.get('password'), password):
+                return True
+
+        except Exception as e:
+            return {"error": "{}".format(e)}
+
+    def getAdminbyAdmin_num(self, admin_num):
+        sql = "SELECT admin_num "
+        sql += "FROM admin "
+        sql += "WHERE admin_num='{}';".format(admin_num)
+
+        try:
+            admin = self.executeOne(sql)
+        except Exception as e:
+            return {"error": "{}".format(e)}
+        return admin

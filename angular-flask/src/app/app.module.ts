@@ -23,6 +23,8 @@ import { AuthService } from "./services/auth.service";
 import { AttentionAdminComponent } from './components/attention-admin/attention-admin.component';
 import { AttentionStuComponent } from './components/attention-stu/attention-stu.component';
 import { PictureIndexComponent } from './components/picture-index/picture-index.component';
+import { SigninAdminComponent } from './components/signin-admin/signin-admin.component';
+import { SignupAdminComponent } from './components/signup-admin/signup-admin.component';
 
 
 
@@ -38,7 +40,9 @@ import { PictureIndexComponent } from './components/picture-index/picture-index.
     ActionCamComponent,
     AttentionAdminComponent,
     AttentionStuComponent,
-    PictureIndexComponent
+    PictureIndexComponent,
+    SigninAdminComponent,
+    SignupAdminComponent
   ],
   imports: [
     BrowserModule,
