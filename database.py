@@ -1,7 +1,6 @@
 import pymysql
 import os
 
-
 class Database():
 
     def __init__(self):
@@ -34,3 +33,10 @@ class Database():
 
     def commit(self):
         self.db.commit()
+
+
+
+
+
+
+

@@ -9,7 +9,8 @@ import { FlashMessagesService } from "angular2-flash-messages";
   styleUrls: ['./attention-admin.component.scss']
 })
 export class AttentionAdminComponent implements OnInit {
-  admin: any;
+  token: any;
+  admin: boolean;
   admin_num: number;
 
   constructor(
@@ -19,19 +20,23 @@ export class AttentionAdminComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+
+
   }
 
   checkadmin() {
     this.authService.checkadmin().subscribe(
       token => {
-        this.admin = token.admin;
-        this.admin_num = token.admin_num
+        this.token = token
       },
       err => {
         console.log(err)
         return false;
       }
     )
+    this.admin = this.token.admin
+    this.admin_num = this.token.admin_num
     return this.admin
   }
+
 }

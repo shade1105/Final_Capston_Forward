@@ -67,8 +67,9 @@ class face_function():
                             face_feature = list(map(float, row))
 
                             face_distances = face_recognition.face_distance(face_feature, face_encodings)
+
                             print('저장된 데이터와 ', 100-(face_distances*100), '% 일치합니다.')
-                            if face_distances<0.2:
+                            if face_distances<0.3:
                                 df.to_csv(csvfiledir, mode='a', index=False, header=None)
                                 break
                             else:

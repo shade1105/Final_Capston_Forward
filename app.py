@@ -11,7 +11,6 @@ from datetime import datetime
 import ast
 import numpy as np
 
-
 from sitable import Signdatabase
 from face import face_function
 
@@ -46,6 +45,7 @@ def register():
         'email': request.get_json()['email'],
         'password': bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     }
+    atten(User.get('stu_num'))
     db = Signdatabase()
     msg = db.register(User)
     if msg == True:
@@ -146,10 +146,9 @@ def signInAdmin():
 
 @app.route("/static/admin/check", methods=['GET'])
 @jwt_required
-def check():
+def checkadmin():
     token_data = get_jwt_identity()
-    print(token_data)
-    return token_data
+    return jsonify(token_data)
 
 @app.route("/static/image/decodeImage", methods=['POST'])
 def decode():
@@ -250,5 +249,66 @@ def cookie_status():
     return (base64.b64decode(tempstr)).decode('UTF-8')
 
 
-if __name__ == '__main__':
-    socketio.run(app, port=9999, debug=True)
+def atten(stunum):
+    db = Signdatabase()
+    a, b, c, f = map(int, '2020,08,25,11'.split(','))
+    import datetime
+    for i in range(16):
+        d = datetime.datetime(a, b, c, f)+datetime.timedelta(weeks=i)
+        attend = {
+            'stu_num': stunum,
+            'week': i+1,
+            'atten_date': d.strftime('%Y-%m-%d %H'),
+            'atten': "None"
+        }
+
+        db.attendInsert(attend)
+
+
+# 과목 조회
+@app.route("/static/subject/info", methods=["POST"])
+def subject_info():
+
+    db = Signdatabase()
+    temp = db.get_subjectInfo(request.get_json()['stu_num'])
+    result = {
+        'msg': temp
+    }
+    return result
+
+
+def subject_index():
+    a, b, c = map(int, input().split(','))
+    for i in range(16):
+        d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
+        print(d.strftime('%Y-%m-%d'))
+
+
+@app.route("/static/atten/attend", methods=["POST"])
+def attendance_check():
+    data = request.get_json()[0]
+    stu_num = data['stu_num']
+    week = data['week']
+    db = Signdatabase()
+    # attend_update 로직 필요
+    db.update_atten(stu_num, week, atten_update(True, stu_num, week))
+    return "UPDATE ON "
+
+
+def atten_update(face_data, stu_num, week):
+    import datetime
+    if face_data == True:
+        db = Signdatabase()
+        bc = db.get_subject_date(stu_num, week)
+        bc = bc['atten_date']
+        cutline = datetime.datetime.now()-bc
+        print(cutline)
+        if cutline < datetime.timedelta(hours=2):
+            return "출석"
+        elif cutline > datetime.timedelta(hours=2):
+            return "지각"
+    elif face_data == False:
+        return "결석"
+
+
+socketio.run(app, port=9999, debug=True)
