@@ -261,7 +261,6 @@ def atten(stunum):
             'atten_date': d.strftime('%Y-%m-%d %H'),
             'atten': "None"
         }
-
         db.attendInsert(attend)
 
 
@@ -310,5 +309,5 @@ def atten_update(face_data, stu_num, week):
     elif face_data == False:
         return "결석"
 
-
-socketio.run(app, port=9999, debug=True)
+if __name__ == "__main__":
+    socketio.run(app, port=9999, debug=True)
