@@ -10,6 +10,15 @@ export class AttentionAdminComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+     const ab = document.getElementById("abs");
+     const inner = ab.innerHTML;
+     const word = "결석";
+     const reg = new RegExp(word,"g");
+     ab.innerHTML = inner.replace(reg, '<span style="color:red">'+ word +'</span>');
+
   }
+
+
 
 }
