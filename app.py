@@ -112,18 +112,18 @@ def signIn():
         }
         return result
 
-#어드민 로그인 로직
+# 어드민 로그인 로직
 @app.route("/static/admin/authenticateAdmin", methods=['POST'])
 def signInAdmin():
     admin_num = request.get_json()['admin_num']
     password = request.get_json()['password']
 
     db = Signdatabase()
-    msg =db.loginadmin(admin_num, password)
+    msg = db.loginadmin(admin_num, password)
     if msg == True:
         token_data = {
             "admin_num": admin_num,
-            "admin":True
+            "admin": True
         }
         token = create_access_token(identity=token_data)
 
@@ -144,11 +144,13 @@ def signInAdmin():
         }
         return result
 
+
 @app.route("/static/admin/check", methods=['GET'])
 @jwt_required
 def checkadmin():
     token_data = get_jwt_identity()
     return jsonify(token_data)
+
 
 @app.route("/static/image/decodeImage", methods=['POST'])
 def decode():
@@ -293,14 +295,18 @@ def attendance_check():
     db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
-
+#음 .............. 암ㄴ렌ㅁㅇ랑ㄴㅁㄹ;ㅣㅋ탚ㅊㅋㅊ;ㅣㅏㄴ;ㅁ이란밍라;ㅣㅊㅋㅍ터
+#ㄷㅂ자딤너이ㅏㅓㅇ라ㅣㅌ첲
 def atten_update(face_data, stu_num, week):
     import datetime
     if face_data == True:
         db = Signdatabase()
         bc = db.get_subject_date(stu_num, week)
         bc = bc['atten_date']
-        cutline = datetime.datetime.now()-bc
+        db.stu_atten_date_update(
+            stu_num=stu_num, week=week, nowtime=datetime.datetime.now())
+        print(db.get_stu_atten_date(stu_num=stu_num, week=week))
+        cutline = db.get_stu_atten_date(stu_num=stu_num, week=week)['stu_atten_date']-bc
         print(cutline)
         if cutline < datetime.timedelta(hours=2):
             return "출석"
@@ -308,6 +314,7 @@ def atten_update(face_data, stu_num, week):
             return "지각"
     elif face_data == False:
         return "결석"
+
 
 if __name__ == "__main__":
     socketio.run(app, port=9999, debug=True)

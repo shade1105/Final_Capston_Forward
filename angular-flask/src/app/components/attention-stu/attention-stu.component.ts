@@ -18,7 +18,6 @@ export class AttentionStuComponent implements OnInit {
   converted_image: string;
   Attentionlist = [];
 
-
   ngOnInit() {
     var msg;
     this.authService
@@ -40,7 +39,7 @@ export class AttentionStuComponent implements OnInit {
       });
   }
 
-    clicked(number) {
+  clicked(number) {
     var asd;
     var dsd;
     var usernum;
@@ -59,15 +58,22 @@ export class AttentionStuComponent implements OnInit {
       });
   }
 
-    clickevent(number) {
+  clickevent(number) {
     //현재 날짜 체크해서 출석 가능/불가능 확인 알고리즘 추가
-    localStorage.setItem('number', number)
+
+    var dsd;
+    var usernum;
+    var asd;
+    dsd = localStorage.getItem("user");
+    usernum = JSON.parse(dsd).stu_num;
+    asd = this.Attentionlist[number - 1].week;
+    this.authService.postAttendData(asd, usernum).subscribe();
+
+    localStorage.setItem("number", number);
     this.router.navigate(["action-cam"]);
   }
-
 
   checkLoggedIn() {
     return this.authService.loggedIn();
   }
- }
-
+}
