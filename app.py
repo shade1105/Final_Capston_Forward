@@ -10,7 +10,7 @@ import os
 from datetime import datetime
 import ast
 import numpy as np
-import cv2
+
 from sitable import Signdatabase
 from face import face_function
 
@@ -61,6 +61,28 @@ def register():
         }
         return result
 
+# 관리자 회원가입 로직
+@app.route('/static/admins/register', methods=['POST'])
+def adminregister():
+    Admin = {
+        'admin_num': request.get_json()['admin_num'],
+        'password': bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
+    }
+    db = Signdatabase()
+    msg = db.registeradmin(Admin)
+    if msg == True:
+        result = {
+            "success": True,
+            "msg": "관리자 등록에 성공하였습니다"
+        }
+        return result
+    else:
+        result = {
+            "success": False,
+            "msg": msg
+        }
+        return result
+
 
 # 로그인 로직
 @app.route("/static/users/authenticate", methods=['POST'])
@@ -88,8 +110,46 @@ def signIn():
             "msg": msg
 
         }
-        print(result)
         return result
+
+# 어드민 로그인 로직
+@app.route("/static/admin/authenticateAdmin", methods=['POST'])
+def signInAdmin():
+    admin_num = request.get_json()['admin_num']
+    password = request.get_json()['password']
+
+    db = Signdatabase()
+    msg = db.loginadmin(admin_num, password)
+    if msg == True:
+        token_data = {
+            "admin_num": admin_num,
+            "admin": True
+        }
+        token = create_access_token(identity=token_data)
+
+        admin = db.getAdminbyAdmin_num(admin_num)
+        result = {
+            "success": True,
+            "msg": "관리자 계정으로 로그인되었습니다",
+            "token": token,
+            "admin": admin
+        }
+
+        return result
+
+    else:
+        result = {
+            "success": False,
+            "msg": msg
+        }
+        return result
+
+
+@app.route("/static/admin/check", methods=['GET'])
+@jwt_required
+def checkadmin():
+    token_data = get_jwt_identity()
+    return jsonify(token_data)
 
 
 @app.route("/static/image/decodeImage", methods=['POST'])
@@ -115,30 +175,17 @@ def decode():
 
     # import face_function module
     ff = face_function()
-    # check face number of picutre
     if ff.check_face_num(cv2_image) == True:
-
-        time_today = str(datetime.now().year) + "." + \
-            str(datetime.now().month) + "." + str(datetime.now().day)
-        imagedir = 'students/' + str(stu_num) + \
-            '_' + name + '/' + time_today + '.jpg'
         if (os.path.isdir('students/' + str(stu_num) + '_' + name)):
             pass
         else:
             os.mkdir('students/' + str(stu_num) + '_' + name)
-        # save face as csv
-        check = ff.registerimage(cv2_image, stu_num, name)
 
-        # 얼굴 인식 확인 및 이미지 저장
-        # save face as csv
         check = ff.registerimage(cv2_image, stu_num, name)
-
         time_today = str(datetime.now().year) + "." + \
             str(datetime.now().month) + "." + str(datetime.now().day)
         imagedir = 'students/' + str(stu_num) + \
             '_' + name + '/' + time_today + '.jpg'
-
-        # 얼굴 인식 확인 및 이미지 저장
         if check == True:
             im.save(imagedir, 'png')
             result = {
@@ -216,7 +263,6 @@ def atten(stunum):
             'atten_date': d.strftime('%Y-%m-%d %H'),
             'atten': "None"
         }
-
         db.attendInsert(attend)
 
 
@@ -249,14 +295,18 @@ def attendance_check():
     db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
-
+#음 .............. 암ㄴ렌ㅁㅇ랑ㄴㅁㄹ;ㅣㅋ탚ㅊㅋㅊ;ㅣㅏㄴ;ㅁ이란밍라;ㅣㅊㅋㅍ터
+#ㄷㅂ자딤너이ㅏㅓㅇ라ㅣㅌ첲
 def atten_update(face_data, stu_num, week):
     import datetime
     if face_data == True:
         db = Signdatabase()
         bc = db.get_subject_date(stu_num, week)
         bc = bc['atten_date']
-        cutline = datetime.datetime.now()-bc
+        db.stu_atten_date_update(
+            stu_num=stu_num, week=week, nowtime=datetime.datetime.now())
+        print(db.get_stu_atten_date(stu_num=stu_num, week=week))
+        cutline = db.get_stu_atten_date(stu_num=stu_num, week=week)['stu_atten_date']-bc
         print(cutline)
         if cutline < datetime.timedelta(hours=2):
             return "출석"
@@ -266,4 +316,5 @@ def atten_update(face_data, stu_num, week):
         return "결석"
 
 
-socketio.run(app, port=9999, debug=True)
+if __name__ == "__main__":
+    socketio.run(app, port=9999, debug=True)

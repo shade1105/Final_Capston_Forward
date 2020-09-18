@@ -18,38 +18,6 @@ export class AttentionStuComponent implements OnInit {
   converted_image: string;
   Attentionlist = [];
 
-  clicked(number) {
-    var asd;
-    var dsd;
-    var usernum;
-    var username;
-    dsd = localStorage.getItem("user");
-    asd = this.Attentionlist[number - 1].date;
-    console.log(this.Attentionlist[number - 1].date);
-    usernum = JSON.parse(dsd).stu_num;
-    username = JSON.parse(dsd).name;
-    var cdcd;
-    this.authService
-      .getImageEncdoe(usernum, username, asd)
-      .subscribe((data) => {
-        cdcd = data["msg"];
-        this.converted_image = "data:image/jpeg;base64," + cdcd;
-      });
-  }
-
-  checkLoggedIn() {
-    return this.authService.loggedIn();
-  }
-  clickevent(number) {
-    var dsd;
-    var usernum;
-    var asd;
-    dsd = localStorage.getItem("user");
-    usernum = JSON.parse(dsd).stu_num;
-    asd = this.Attentionlist[number - 1].week;
-    this.authService.postAttendData(asd, usernum).subscribe();
-    location.reload();
-  }
   ngOnInit() {
     var msg;
     this.authService
@@ -69,5 +37,43 @@ export class AttentionStuComponent implements OnInit {
           );
         }
       });
+  }
+
+  clicked(number) {
+    var asd;
+    var dsd;
+    var usernum;
+    var username;
+    dsd = localStorage.getItem("user");
+    asd = this.Attentionlist[number - 1].date;
+    console.log(this.Attentionlist[number - 1].date);
+    usernum = JSON.parse(dsd).stu_num;
+    username = JSON.parse(dsd).name;
+    var cdcd;
+    this.authService
+      .getImageEncdoe(usernum, username, asd)
+      .subscribe((data) => {
+        cdcd = data["msg"];
+        this.converted_image = "data:image/jpeg;base64," + cdcd;
+      });
+  }
+
+  clickevent(number) {
+    //현재 날짜 체크해서 출석 가능/불가능 확인 알고리즘 추가
+
+    var dsd;
+    var usernum;
+    var asd;
+    dsd = localStorage.getItem("user");
+    usernum = JSON.parse(dsd).stu_num;
+    asd = this.Attentionlist[number - 1].week;
+    this.authService.postAttendData(asd, usernum).subscribe();
+
+    localStorage.setItem("number", number);
+    this.router.navigate(["action-cam"]);
+  }
+
+  checkLoggedIn() {
+    return this.authService.loggedIn();
   }
 }

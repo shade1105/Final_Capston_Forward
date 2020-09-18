@@ -19,9 +19,11 @@ import { FlashMessagesModule } from "angular2-flash-messages";
 import { FlashMessagesService } from "angular2-flash-messages";
 import { ValidateService } from "./services/validate.service";
 import { AuthService } from "./services/auth.service";
-import { AttentionAdminComponent } from "./components/attention-admin/attention-admin.component";
-import { AttentionStuComponent } from "./components/attention-stu/attention-stu.component";
-import { PictureIndexComponent } from "./components/picture-index/picture-index.component";
+import { AttentionAdminComponent } from './components/attention-admin/attention-admin.component';
+import { AttentionStuComponent } from './components/attention-stu/attention-stu.component';
+import { PictureIndexComponent } from './components/picture-index/picture-index.component';
+import { SigninAdminComponent } from './components/signin-admin/signin-admin.component';
+import { SignupAdminComponent } from './components/signup-admin/signup-admin.component';
 import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component";
 
 @NgModule({
@@ -36,7 +38,10 @@ import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component
     AttentionAdminComponent,
     AttentionStuComponent,
     PictureIndexComponent,
-    MkSubjectComponent,
+    SigninAdminComponent,
+    SignupAdminComponent,
+    MkSubjectComponent
+
   ],
   imports: [
     BrowserModule,
@@ -55,4 +60,5 @@ import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component
   providers: [FlashMessagesService, ValidateService, AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
+
 export class AppModule {}

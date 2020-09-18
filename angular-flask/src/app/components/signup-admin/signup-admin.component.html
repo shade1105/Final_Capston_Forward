@@ -1,0 +1,29 @@
+<h2 class="page-header">Admin Register</h2>
+
+
+  <form (ngSubmit)="onAdminRegister()">
+    <div class="form-group">
+      <label> Admin Number</label>
+      <input type="number" [(ngModel)]="admin_num" name="admin_num" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label> Password </label>
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label> Check Password </label>
+      <input
+        type="password"
+        [(ngModel)]="passwordcheck"
+        name="passwordcheck"
+        class="form-control"
+      />
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit" />
+  </form>
+
