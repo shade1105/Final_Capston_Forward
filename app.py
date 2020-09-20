@@ -211,6 +211,11 @@ def decode():
 
 @app.route("/static/image/encode/send", methods=["POST", "GET"])
 def imgSend():
+    """
+    프론트 상에서 POST 요청이 들어오면 이미지 파일을 encode해서 전송해줌 
+    attention-stu 상에서 보기 버튼 클릭시 실행 
+    return : base64 encode data 
+    """
     if request.method == "POST":
         name = request.get_json()[0]['name']
         stu_num = request.get_json()[0]['stu_num']
@@ -228,6 +233,13 @@ def imgSend():
 
 
 def imgencode(name, stu_num, date):
+    """
+    파라미터로 받은 위치에 사진을 base64이미지 String 형식으로 반환해줌 
+    :param name: 학생이름
+    :param stu_num: 학번
+    :param date: 날짜 
+    :return : ./stu_num/Name/date.jpg 라는 파일을 encode 해줌 
+    """
     with open("./students/{}_{}/{}.jpg".format(stu_num, name, date), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
 
@@ -252,6 +264,12 @@ def cookie_status():
 
 
 def atten(stunum):
+    """
+    과목생성 페이지가 없어서 인위적으로 데이터베이스에 과목을 생성하기위해
+    구현한 로직 
+    :param : 학번
+    :return : 데이터베이스에 attend테이블에 데이터 생성  
+    """
     db = Signdatabase()
     a, b, c, f = map(int, '2020,08,25,11'.split(','))
     import datetime
@@ -278,26 +296,36 @@ def subject_info():
     return result
 
 
+""" 
 def subject_index():
     a, b, c = map(int, input().split(','))
     for i in range(16):
         d = datetime.datetime(a, b, c)+datetime.timedelta(weeks=i)
         print(d.strftime('%Y-%m-%d'))
+"""
 
 
 @app.route("/static/atten/attend", methods=["POST"])
 def attendance_check():
+    """
+    프론트에서 출석데이터를 요청했을경우 처리해주는 로직
+    :param : 
+    :return : 얼굴인식 값과 학번을 통하여 atten_update() 로직을 실행
+    """
     data = request.get_json()[0]
     stu_num = data['stu_num']
     week = data['week']
     db = Signdatabase()
-    # attend_update 로직 필요
     db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
-#음 .............. 암ㄴ렌ㅁㅇ랑ㄴㅁㄹ;ㅣㅋ탚ㅊㅋㅊ;ㅣㅏㄴ;ㅁ이란밍라;ㅣㅊㅋㅍ터
-#ㄷㅂ자딤너이ㅏㅓㅇ라ㅣㅌ첲
+
 def atten_update(face_data, stu_num, week):
+    """
+    얼굴 인식이 완료 되면 데이터베이스에 출결 값과 출석 시간을 저장함
+    :param :얼굴인식 상태(True,False) , 학번 , 출결 주차
+    :return : 출결 값 (출석,지각,결석)
+    """
     import datetime
     if face_data == True:
         db = Signdatabase()
@@ -305,9 +333,8 @@ def atten_update(face_data, stu_num, week):
         bc = bc['atten_date']
         db.stu_atten_date_update(
             stu_num=stu_num, week=week, nowtime=datetime.datetime.now())
-        print(db.get_stu_atten_date(stu_num=stu_num, week=week))
-        cutline = db.get_stu_atten_date(stu_num=stu_num, week=week)['stu_atten_date']-bc
-        print(cutline)
+        cutline = db.get_stu_atten_date(stu_num=stu_num, week=week)[
+            'stu_atten_date']-bc
         if cutline < datetime.timedelta(hours=2):
             return "출석"
         elif cutline > datetime.timedelta(hours=2):
