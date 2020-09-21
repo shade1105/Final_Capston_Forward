@@ -29,7 +29,6 @@ export class NavbarComponent implements OnInit {
   }
   //로그인되어있으면 true반환
   checkLoggedIn() {
-    console.log(this.authService.loggedIn())
     return this.authService.loggedIn();
   }
 

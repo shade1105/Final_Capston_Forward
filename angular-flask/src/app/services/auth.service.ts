@@ -69,7 +69,7 @@ export class AuthService {
     const httOptions1 = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer "+this.authToken
+        Authorization: "Bearer " + this.authToken
       })
     }
     const checkingUrl = this.prepEndpoint("static/admin/check");
