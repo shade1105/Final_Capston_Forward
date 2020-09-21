@@ -313,9 +313,12 @@ def attendance_check():
     :return : 얼굴인식 값과 학번을 통하여 atten_update() 로직을 실행
     """
     data = request.get_json()[0]
+    print(data)
     stu_num = data['stu_num']
     week = data['week']
     db = Signdatabase()
+    # TODO decode() 에서 결과 값만 atten_update True 자리에
+    # 결과를 반환하는것만 넣어주면 해결
     db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
