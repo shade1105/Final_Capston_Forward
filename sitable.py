@@ -21,10 +21,10 @@ class Signdatabase(Database):
 
         return result
 
-
     def registeradmin(self, Admin):
         sql = "INSERT INTO admin(admin_num, password)"
-        sql += " VALUES('{}','{}');".format(Admin.get('admin_num'), Admin.get('password'))
+        sql += " VALUES('{}','{}');".format(Admin.get('admin_num'),
+                                            Admin.get('password'))
 
         try:
             self.cursor.execute(sql)
@@ -57,7 +57,6 @@ class Signdatabase(Database):
         except Exception as e:
             return {"error": "{}".format(e)}
         return user
-
 
     def loginadmin(self, admin_num, password):
         sql = "SELECT admin_num, password "
@@ -127,3 +126,22 @@ class Signdatabase(Database):
             result = e
         return result
 
+    def stu_atten_date_update(self, stu_num, week, nowtime):
+        sql = 'UPDATE attend SET stu_atten_date = "{}"'.format(nowtime)
+        sql += ' WHERE (WEEK={} AND stu_num={})'.format(week, stu_num)
+        try:
+            result = self.executeOne(sql)
+            self.db.commit()
+        except Exception as e:
+            result = e
+
+        return result
+
+    def get_stu_atten_date(self, stu_num, week):
+        sql = 'SELECT stu_atten_date FROm attend  WHERE stu_num = {} AND WEEK = {} '.format(
+            stu_num, week)
+        try:
+            result = self.executeOne(sql)
+        except Exception as e:
+            result = e
+        return result

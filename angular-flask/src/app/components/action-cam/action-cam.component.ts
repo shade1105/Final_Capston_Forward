@@ -36,6 +36,12 @@ export class ActionCamComponent implements OnInit {
   };
   videoWidth = 0;
   videoHeight = 0;
+  /*
+    ** HTML 상에서 Cam 에서 받은 이미지를 저장하는 로직 
+    ** input : null
+    ** return : saveImage
+    ** author  : 이재현
+    */
   startcamera() {
     if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices

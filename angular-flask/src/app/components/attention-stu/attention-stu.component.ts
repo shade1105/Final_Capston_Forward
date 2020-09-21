@@ -17,10 +17,15 @@ export class AttentionStuComponent implements OnInit {
   fullImagePath: string;
   converted_image: string;
   Attentionlist = [];
-
-
-  ngOnInit() {
-    var msg;
+ ngOnInit() {
+  /*
+  ** 생성자가 호출될 때 배열에대한 날짜 포멧에 따라
+  ** 초기화해서 생성해줌  
+  ** input : null
+  ** return : null 
+  ** author  : 이재현
+  */
+  var msg;
     this.authService
       .getSubjectData(localStorage.getItem("user"))
       .subscribe((data) => {
@@ -40,7 +45,13 @@ export class AttentionStuComponent implements OnInit {
       });
   }
 
-    clicked(number) {
+  clicked(number) {
+    /*
+    ** 해당 버튼클릭시 number에 반환하는 값을 이미지형식으로 보여줌 
+    ** input : number(week)
+    ** return : image
+    ** author  : 이재현
+    */
     var asd;
     var dsd;
     var usernum;
@@ -59,15 +70,27 @@ export class AttentionStuComponent implements OnInit {
       });
   }
 
-    clickevent(number) {
+  clickevent(number) {
     //현재 날짜 체크해서 출석 가능/불가능 확인 알고리즘 추가
-    localStorage.setItem('number', number)
+    /*
+    ** 해당 버튼클릭시 number에 반환하는 값에 action-cam 을 실행하여
+    ** 출석 로직을 실행 
+    ** input : number(week)
+    ** return : null 
+    ** author  : 이재현
+    */
+    var dsd;
+    var usernum;
+    var asd;
+    dsd = localStorage.getItem("user");
+    usernum = JSON.parse(dsd).stu_num;
+    asd = this.Attentionlist[number - 1].week;
+    this.authService.postAttendData(asd, usernum).subscribe();
+    localStorage.setItem("number", number);
     this.router.navigate(["action-cam"]);
   }
-
 
   checkLoggedIn() {
     return this.authService.loggedIn();
   }
- }
-
+}
