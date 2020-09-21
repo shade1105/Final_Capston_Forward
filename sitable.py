@@ -107,6 +107,7 @@ class Signdatabase(Database):
 
     def update_atten(self, stu_num, week, atten):
         sql = 'UPDATE attend SET atten = "{}" '.format(atten)
+        #sql = ', atten_date = "{}" '.format()
         sql += 'WHERE (WEEK={} AND stu_num={}) '.format(week, stu_num)
         print(sql)
         try:

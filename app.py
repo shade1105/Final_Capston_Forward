@@ -183,9 +183,11 @@ def decode():
         time_today = str(datetime.now().year) + "." + \
             str(datetime.now().month) + "." + str(datetime.now().day)
         imagedir = 'students/' + str(stu_num) + \
-            '_' + name + '/' + time_today + '.jpg'
+            '_' + name + '/' + time_today + '.png'
+
         if check == True:
-            im.save(imagedir, 'png')
+            im.save(imagedir)
+
             result = {
                 "success": True,
                 "msg": "얼굴 데이터셋 생성 성공"
@@ -226,7 +228,7 @@ def imgSend():
 
 
 def imgencode(name, stu_num, date):
-    with open("./students/{}_{}/{}.jpg".format(stu_num, name, date), "rb") as img_file:
+    with open("./students/{}_{}/{}.png".format(stu_num, name, date), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
 
     return my_string
@@ -289,7 +291,6 @@ def attendance_check():
     stu_num = data['stu_num']
     week = data['week']
     db = Signdatabase()
-    # attend_update 로직 필요
     db.update_atten(stu_num, week, atten_update(True, stu_num, week))
     return "UPDATE ON "
 
@@ -301,7 +302,7 @@ def atten_update(face_data, stu_num, week):
         bc = db.get_subject_date(stu_num, week)
         bc = bc['atten_date']
         cutline = datetime.datetime.now()-bc
-        print(cutline)
+        print('cutline: ',cutline)
         if cutline < datetime.timedelta(hours=2):
             return "출석"
         elif cutline > datetime.timedelta(hours=2):
