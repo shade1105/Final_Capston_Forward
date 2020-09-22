@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from "../../services/auth.service";
+import { Router } from "@angular/router";
+import { FlashMessagesService } from "angular2-flash-messages";
 
 @Component({
   selector: 'app-attention-admin',
@@ -6,17 +9,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./attention-admin.component.scss']
 })
 export class AttentionAdminComponent implements OnInit {
+  token: any;
+  admin: boolean;
+  admin_num: number;
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private flashMessage: FlashMessagesService
+    ) { }
 
-  ngOnInit(): void {
 
-     const ab = document.getElementById("abs");
-     const inner = ab.innerHTML;
-     const word = "결석";
-     const reg = new RegExp(word,"g");
-     ab.innerHTML = inner.replace(reg, '<span style="color:red">'+ word +'</span>');
+  ngOnInit() {
 
+
+  }
+
+  checkadmin() {
+    this.authService.checkadmin().subscribe(
+      token => {
+        this.token = token
+      },
+      err => {
+        console.log(err)
+        return false;
+      }
+    )
+    this.admin = this.token.admin
+    this.admin_num = this.token.admin_num
+    return this.admin
   }
 
 

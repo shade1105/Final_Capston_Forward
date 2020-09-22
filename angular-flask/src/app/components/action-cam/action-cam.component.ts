@@ -6,6 +6,8 @@ import {
   ViewChild,
 } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
+import { FlashMessagesService } from "angular2-flash-messages";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-action-cam",
@@ -15,8 +17,16 @@ import { AuthService } from "../../services/auth.service";
 export class ActionCamComponent implements OnInit {
   @ViewChild("video", { static: true }) videoElement: ElementRef;
   @ViewChild("canvas", { static: true }) canvas: ElementRef;
+  stu_num: number;
+  name: string;
+  email: string;
 
-  constructor(private renderer: Renderer2, private authService: AuthService) {}
+
+  constructor(private renderer: Renderer2,
+  private authService: AuthService,
+  private router: Router,
+  private flashMessage: FlashMessagesService
+) {}
   constraints = {
     video: {
       facingMode: "environment",
@@ -68,10 +78,31 @@ export class ActionCamComponent implements OnInit {
   }
 
   saveas() {
-    var encdoeImage = this.canvas.nativeElement.toDataURL("image/png");
+    var encodeImage = this.canvas.nativeElement.toDataURL("image/png");
 
-    const jsonEncodeImage = JSON.stringify(encdoeImage);
-    this.authService.sendImageDecode(jsonEncodeImage).subscribe();
+    const jsonEncodeImage = JSON.stringify(encodeImage);
+    const data = {
+    user: localStorage.getItem('user'),
+    'image': JSON.stringify(encodeImage)
+    }
+
+    this.authService.sendImageDecode(data).subscribe(data => {
+      if (data.success) {
+        this.flashMessage.show(data.msg, {
+          cssClass: "alert-success",
+          timeout: 3000
+        });
+        this.router.navigate(["attention-stu"]);
+      } else{
+        this.flashMessage.show(data.msg, {
+          cssClass: "alert-danger",
+          timeout: 3000
+        });
+      }
+
+    });
+
+
   }
 
   ngOnInit() {

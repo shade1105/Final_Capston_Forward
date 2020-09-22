@@ -25,21 +25,19 @@ export class AuthService {
     const registerUrl = this.prepEndpoint("static/users/register");
     return this.http.post(registerUrl, user, httpOptions);
   }
+  registerAdmin(user): Observable<any> {
+    const registerUrl = this.prepEndpoint("static/admins/register");
+    return this.http.post(registerUrl, user, httpOptions);
+  }
 
   authenticateUser(login): Observable<any> {
     const loginUrl = this.prepEndpoint("static/users/authenticate");
     return this.http.post(loginUrl, login, httpOptions);
   }
-  getProfile(): Observable<any> {
-    this.authToken = localStorage.getItem("idtoken");
-    const httpOptions1 = {
-      headers: new HttpHeaders({
-        "Content-Type": "application/json",
-        Authorization: this.authToken,
-      }),
-    };
-    const profileUrl = this.prepEndpoint("static/users/profile");
-    return this.http.get(profileUrl, httpOptions1);
+
+   authenticateAdmin(login): Observable<any> {
+    const loginUrl = this.prepEndpoint("static/admin/authenticateAdmin");
+    return this.http.post(loginUrl, login, httpOptions);
   }
 
   getList(): Observable<any> {
@@ -49,7 +47,7 @@ export class AuthService {
 
   storeUserData(token, userNoPW) {
     localStorage.setItem("idtoken", token);
-    localStorage.setItem("user", userNoPW);
+    localStorage.setItem("user", JSON.stringify(userNoPW));
     this.authToken = token;
     this.userNoPW = userNoPW;
   }
@@ -61,10 +59,54 @@ export class AuthService {
   loggedIn() {
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
-  sendImageDecode(encdoeData): Observable<any> {
-    const sendImage = this.prepEndpoint("static/image/decodeImage");
+  rootloggedIn(){
+    //루트 로그인 확인 알고리즘 추가필요
+    return !this.jwtHelper.isTokenExpired(this.authToken);
+  }
 
-    return this.http.post(sendImage, encdoeData, httpOptions);
+  checkadmin(){
+    this.authToken = localStorage.getItem('idtoken')
+    const httOptions1 = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        Authorization: "Bearer "+this.authToken
+      })
+    }
+    const checkingUrl = this.prepEndpoint("static/admin/check");
+    return this.http.get(checkingUrl, httOptions1)
+  }
+
+
+  sendImageDecode(data): Observable<any> {
+    const sendImage = this.prepEndpoint("static/image/decodeImage");
+    return this.http.post(sendImage, data, httpOptions);
+  }
+  getImageEncdoe(usernum, username, date): Observable<any> {
+    const getEncodeImage = this.prepEndpoint("/static/image/encode/send");
+    const data = [
+      {
+        stu_num: usernum,
+        name: username,
+        date: date,
+      },
+    ];
+
+    return this.http.post(getEncodeImage, data, httpOptions);
+  }
+  getSubjectData(user): Observable<any> {
+    const getSubjectURL = this.prepEndpoint("static/subject/info");
+    return this.http.post(getSubjectURL, user, httpOptions);
+  }
+
+  postAttendData(week, usernum): Observable<any> {
+    const postAttendDataURL = this.prepEndpoint("static/atten/attend");
+    const data = [
+      {
+        stu_num: usernum,
+        week: week,
+      },
+    ];
+    return this.http.post(postAttendDataURL, data, httpOptions);
   }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;

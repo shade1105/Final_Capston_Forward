@@ -1,0 +1,21 @@
+CREATE DATABASE IF NOT EXISTS `capston` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `capston`;
+
+
+-- 테이블 capston.attend 구조 내보내기
+CREATE TABLE IF NOT EXISTS `attend` (
+  `stu_num` int(11) DEFAULT NULL,
+  `week` int(2) DEFAULT NULL,
+  `atten_date` timestamp NULL DEFAULT NULL,
+  `atten` varchar(5) CHARACTER SET utf8 DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `stu_num` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(128) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  UNIQUE KEY `name` (`name`),
+  UNIQUE KEY `stu_num` (`stu_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;

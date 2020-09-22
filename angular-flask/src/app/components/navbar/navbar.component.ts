@@ -10,6 +10,10 @@ import { AuthService } from "../../services/auth.service";
 })
 export class NavbarComponent implements OnInit {
 
+  token: any;
+  admin: boolean;
+  admin_num: number;
+
   constructor(
   private router: Router,
   private authService: AuthService,
@@ -30,6 +34,10 @@ export class NavbarComponent implements OnInit {
   //로그인되어있으면 true반환
   checkLoggedIn() {
     return this.authService.loggedIn();
+  }
+
+  checkAdmin() {
+    return this.authService.checkadmin();
   }
 
 

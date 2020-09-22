@@ -1,189 +1,228 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Forward</title>
-    <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap" rel="stylesheet">
+    <meta charset="utf-8" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
-      table { font-family: 'Nanum Myeongjo', serif; }
-      h4 { font-family: 'Noto Serif KR', serif; text-align:center;}
-      div { font-family: 'Noto Serif KR', serif; }
-      td {text-align:center;}
-      th {text-align:center;}
-      .tableclass { width:700px; margin-left:auto; margin-right:auto; }
-      .secondtable { width:700px; margin-left:auto; margin-right:auto;}
+      table {
+        font-family: "Nanum Myeongjo", serif;
+      }
+      h4 {
+        font-family: "Noto Serif KR", serif;
+        text-align: center;
+      }
+      div {
+        font-family: "Noto Serif KR", serif;
+      }
+      td {
+        text-align: center;
+      }
+      th {
+        text-align: center;
+      }
+      .tableclass {
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .secondtable {
+        width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     </style>
   </head>
 
-<ng-template [ngIf]="checkLoggedIn()">
-  <body class="p-3 mb-2 bg-light text-dark">
-    <main role="main">
-      <br>
-      <div><h2 style="text-align:center">출결 현황</h2></div> <br>
+  <ng-template [ngIf]="checkLoggedIn()">
+    <body class="p-3 mb-2 bg-light text-dark">
+      <main role="main">
+        <br />
+        <div><h2 style="text-align: center">출결 현황</h2></div>
+        <br />
 
+        <div class="tableclass">
+          <table class="table table-bordered">
+            <thead>
+              <tr class="text-center">
+                <th scope="col">강의명</th>
+                <th scope="col">담당교수</th>
+                <th scope="col">학점</th>
+                <th scope="col">강의기간 및 시간</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="text-center">
+                <th scope="row">정보보호프로그래밍</th>
+                <td>홍길동</td>
+                <td>3</td>
+                <td>수요일 3교시 ~ 6교시</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
+        <div id="kk" class="secondtable">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">주차</th>
+                <th scope="col">날짜</th>
+                <th scope="col">출결 현황</th>
+                <th scope="col">상세이력</th>
+              </tr>
+            </thead>
+            <tbody id="tty" *ngFor="let attention of Attentionlist">
+              <tr id="ttyy" class="table-primary">
+                <th scope="row">{{ attention.week }}주차</th>
+                <td id="week">{{ attention.date }}</td>
+                <td>{{ attention.attend }}</td>
+                <td></td>
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark btn-sm"
+                    data-toggle="modal"
+                    data-target="#staticBackdrop"
+                    (click)="clicked(attention.week)"
+                  >
+                    보기
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-dark btn-sm"
+                    (click)="clickevent(attention.week)"
+                  >
+                    출석
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="modal fade"
+          id="staticBackdrop"
+          data-backdrop="static"
+          data-keyboard="false"
+          tabindex="-1"
+          aria-labelledby="staticBackdropLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">
+                  Modal title
+                </h5>
+                <button
+                  type="button"
+                  class="close"
+                  data-dismiss="modal"
+                  aria-label="Close"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <img
+                  src="{{ converted_image }}"
+                  height="420"
+                  width="380"
+                  alt="Responsive image"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary">
+                  Understood
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p>
+          <img src="{{ fullImagePath }}" alt="Responsive image" />
+        </p>
 
-      <div class="tableclass">
-        <table class="table table-bordered">
-          <thead>
-            <tr class="text-center">
-              <th scope="col">강의명</th>
-              <th scope="col">담당교수</th>
-              <th scope="col">학점</th>
-              <th scope="col">강의기간 및 시간</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="text-center">
-              <th scope="row">정보보호프로그래밍</th>
-              <td>홍길동</td>
-              <td>3</td>
-              <td>수요일 3교시 ~ 6교시</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <footer class="container">
+          <p class="float-right"><a href="#">Back to top</a></p>
+          <p>
+            &copy; 2017-2020 Company, Inc. &middot;
+            <a href="#">Privacy</a> &middot; <a href="#">Terms</a>
+          </p>
+        </footer>
+      </main>
+      <script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+      ></script>
+      <script>
+        window.jQuery ||
+          document.write(
+            '<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>'
+          );
+      </script>
+      <script
+        src="/docs/4.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"
+      ></script>
+      <script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"
+      ></script>
+    </body>
+  </ng-template>
 
-
-      <div class="secondtable">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">주차</th>
-              <th scope="col">날짜</th>
-              <th scope="col">출결 현황</th>
-              <th scope="col">상세이력</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="table-primary">
-              <th scope="row">1주차</th>
-              <td>2020.07.29.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-danger">
-              <th scope="row">2주차</th>
-              <td>2020.08.05.</td>
-              <td>결석</td>
-              <td></td>
-            </tr>
-            <tr class="table-warning">
-              <th scope="row">3주차</th>
-              <td>2020.08.12.</td>
-              <td class="text-warning">지각</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">4주차</th>
-              <td>2020.08.19.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-danger">
-              <th scope="row">5주차</th>
-              <td>2020.08.26.</td>
-              <td class="text-danger">결석</td>
-              <td></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">6주차</th>
-              <td>2020.09.02.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">7주차</th>
-              <td>2020.09.09.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">8주차</th>
-              <td>2020.09.16.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">9주차</th>
-              <td>2020.09.23.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">10주차</th>
-              <td>2020.10.07.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">11주차</th>
-              <td>2020.10.14.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">12주차</th>
-              <td>2020.10.21.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">13주차</th>
-              <td>2020.10.28.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">14주차</th>
-              <td>2020.11.04.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-            <tr class="table-primary">
-              <th scope="row">15주차</th>
-              <td>2020.11.11.</td>
-              <td>출석</td>
-              <td><button type="button" class="btn btn-outline-dark btn-sm">보기</button></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p id="abs">결석</p>
-
-
-
-      <footer class="container">
-            <p class="float-right"><a href="#">Back to top</a></p>
-            <p>&copy; 2017-2020 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
-    </main>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
-      <script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script>
-      <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
-
-</body>
-</ng-template>
-
-
-<ng-template [ngIf]="!checkLoggedIn()">
-  <br><br><br>
-  <div style="text-align:center" class="container">
-  <img src="../../../assets/password.png" alt="login" width="200"><br>
-  <h4><span class="text-danger">출결 현황</span>을 확인하시려면 로그인을 해주세요.</h4></div>
-  <br>
-
-
-
-    <div class="col text-center" style="margin-right:auto; margin-left:auto; width:300px;">
-      <button routerLink='/signin' class="btn btn-lg btn-secondary btn-block" value="pleaselogin">로그인하러 가기</button>
+  <ng-template [ngIf]="!checkLoggedIn()">
+    <br /><br /><br />
+    <div style="text-align: center" class="container">
+      <img src="../../../assets/password.png" alt="login" width="200" /><br />
+      <h4>
+        <span class="text-danger">출결 현황</span>을 확인하시려면 로그인을
+        해주세요.
+      </h4>
     </div>
+    <br />
 
-
-</ng-template>
+    <div
+      class="col text-center"
+      style="margin-right: auto; margin-left: auto; width: 300px"
+    >
+      <button
+        routerLink="/signin"
+        class="btn btn-lg btn-secondary btn-block"
+        value="pleaselogin"
+      >
+        로그인하러 가기
+      </button>
+    </div>
+  </ng-template>
 </html>

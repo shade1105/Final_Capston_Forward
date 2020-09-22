@@ -11,7 +11,7 @@ export class Login {
 }
 
 export class UserNoPW {
+  stu_num: number;
   name: string;
   email: string;
-  stu_num: number;
 }

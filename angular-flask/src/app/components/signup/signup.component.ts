@@ -41,7 +41,6 @@ export class SignupComponent implements OnInit {
       email: this.email,
       password: this.passwordcheck
     };
-
     //Require Fileds
     if (!this.validateService.validateRegister(user)) {
       this.flashMessage.show("모든 필드를 채워주세요", {
@@ -58,7 +57,6 @@ export class SignupComponent implements OnInit {
       });
       return false;
     }
-
     //Register User
     this.authService.registerUser(user).subscribe(data => {
       if (data.success) {

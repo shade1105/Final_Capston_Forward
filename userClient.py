@@ -1,5 +1,5 @@
 import cv2
-import face_recognition
+import face
 import hashlib
 
 import numpy as np
@@ -23,11 +23,11 @@ def clientExe(userID):
     while True:
         ret, frame = cap.read()
         data = pickle.dumps(frame)
-        face_landmarks_list = face_recognition.face_landmarks(frame)
+        face_landmarks_list = face.face_landmarks(frame)
         # 현재 얼굴이 인식된 상태에서만 데이터를 전송함
         if face_landmarks_list:
-            face_locations = face_recognition.face_locations(frame)
-            face_encodings = face_recognition.face_encodings(
+            face_locations = face.face_locations(frame)
+            face_encodings = face.face_encodings(
                 frame, face_locations)
             face_encodings = np.asarray(face_encodings).T
             data = pickle.dumps(face_encodings)

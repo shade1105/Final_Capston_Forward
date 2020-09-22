@@ -1,14 +1,12 @@
 import pymysql
 import os
 
-
 class Database():
 
     def __init__(self):
         self.db = pymysql.connect(
             host='localhost',
             user='root',
-
             password='root',
             db='capston',
             charset='utf8',
@@ -35,3 +33,10 @@ class Database():
 
     def commit(self):
         self.db.commit()
+
+
+
+
+
+
+
