@@ -35,7 +35,7 @@ export class AuthService {
     return this.http.post(loginUrl, login, httpOptions);
   }
 
-   authenticateAdmin(login): Observable<any> {
+  authenticateAdmin(login): Observable<any> {
     const loginUrl = this.prepEndpoint("static/admin/authenticateAdmin");
     return this.http.post(loginUrl, login, httpOptions);
   }
@@ -59,23 +59,22 @@ export class AuthService {
   loggedIn() {
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
-  rootloggedIn(){
+  rootloggedIn() {
     //루트 로그인 확인 알고리즘 추가필요
     return !this.jwtHelper.isTokenExpired(this.authToken);
   }
 
-  checkadmin(){
-    this.authToken = localStorage.getItem('idtoken')
+  checkadmin() {
+    this.authToken = localStorage.getItem("idtoken");
     const httOptions1 = {
       headers: new HttpHeaders({
         "Content-Type": "application/json",
-        Authorization: "Bearer " + this.authToken
-      })
-    }
+        Authorization: "Bearer " + this.authToken,
+      }),
+    };
     const checkingUrl = this.prepEndpoint("static/admin/check");
-    return this.http.get(checkingUrl, httOptions1)
+    return this.http.get(checkingUrl, httOptions1);
   }
-
 
   sendImageDecode(data): Observable<any> {
     const sendImage = this.prepEndpoint("static/image/decodeImage");
@@ -107,6 +106,10 @@ export class AuthService {
       },
     ];
     return this.http.post(postAttendDataURL, data, httpOptions);
+  }
+  getAlluserData(): Observable<any> {
+    const Url = this.prepEndpoint("static/admin/atten");
+    return this.http.get(Url, httpOptions);
   }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;

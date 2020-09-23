@@ -349,5 +349,15 @@ def atten_update(face_data, stu_num, week):
         return "결석"
 
 
+@app.route("/static/admin/atten",methods=["POST", "GET"])
+def adminAtten():
+    db = Signdatabase()
+    data = db.get_all_user_data()
+    result = {
+        'msg': data
+    }
+    return result
+
+
 if __name__ == "__main__":
     socketio.run(app, port=9999, debug=True)
