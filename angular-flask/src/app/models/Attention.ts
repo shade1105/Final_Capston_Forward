@@ -11,7 +11,7 @@ export class Attention {
     this._attend = attend;
   }
   get stu_num(): number {
-    return this.stu_num;
+    return this._stu_num;
   }
   set stu_num(value: number) {
     this.stu_num = value;
