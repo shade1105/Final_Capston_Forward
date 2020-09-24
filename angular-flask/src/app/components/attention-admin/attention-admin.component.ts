@@ -21,17 +21,16 @@ export class AttentionAdminComponent implements OnInit {
   adminAttenlist = [];
 
   ngOnInit() {
-    // TODO 머리아프다 ....
-    // 클릭해서 유저 출결 화면 으로 이동해버리자... 
+    // TODO 이미지 공간에있는저건 어떻게 처리해아할까 흠 ..
     var msg;
-    this.authService.getAlluserData().subscribe((data)=> {
+    this.authService.getAlluserData().subscribe((data) => {
       msg = data["msg"];
-      for (var i = 0 ; i <msg.length; i++){
-          this.adminAttenlist.push(new adminAtten(i+1,msg[i].name,msg[i].stu_num))
+      for (var i = 0; i < msg.length; i++) {
+        this.adminAttenlist.push(
+          new adminAtten(i + 1, msg[i].name, msg[i].stu_num)
+        );
       }
     });
-    console.log(msg)
-
     this.authService.checkadmin().subscribe(
       (token) => {
         this.token = token;
@@ -39,9 +38,21 @@ export class AttentionAdminComponent implements OnInit {
         this.admin_num = this.token.admin_num;
       },
       (err) => {
-        return false;
+        this.admin = false;
       }
     );
-    console.log(this.adminAttenlist);
+  }
+  clickevent(number) {
+    var bc;
+    var ds;
+    bc = this.adminAttenlist[number - 1];
+
+    ds = {
+      name: bc["_username"],
+      stu_num: bc["_usernumber"],
+    };
+    console.log(ds);
+    localStorage.setItem("user", JSON.stringify(ds));
+    this.router.navigate(["attention-stu"]);
   }
 }

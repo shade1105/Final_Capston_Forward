@@ -22,7 +22,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a *ngIf="!checkLoggedIn()" class="dropdown-item" routerLink='/signup'>회원가입</a>
           <a *ngIf="!checkLoggedIn()" class="dropdown-item" routerLink='/signin'>로그인</a>
-          <a *ngIf="checkLoggedIn()" class="dropdown-item" (click)="onLogoutClick()" href="">로그아웃</a>
+          <a *ngIf="checkLoggedIn()" class="dropdown-item" (click)="onLogoutClick()" routerLink=''>로그아웃</a>
           <div class="dropdown-divider"></div>
         </div>
       </li>

@@ -92,12 +92,19 @@
             <tbody id="tty" *ngFor="let adminAtten of adminAttenlist">
               <tr class="table-primary">
                 <th scope="row" style="vertical-align: middle; height: 100px">
-                  {{adminAtten.pvnumber}}
+                  {{ adminAtten.pvnumber }}
                 </th>
-                <td>{{adminAtten.username}}</td>
-                <td>{{adminAtten.usernumber}}</td>
+                <td>{{ adminAtten.username }}</td>
+                <td>{{ adminAtten.usernumber }}</td>
                 <td>정보보호학과</td>
-                <td>출석</td>
+                <td>
+                  <button
+                    style="background-color: transparent"
+                    (click)="clickevent(adminAtten.pvnumber)"
+                  >
+                    확인
+                  </button>
+                </td>
                 <td>
                   <img
                     src="../../../assets/dog.jpg"
