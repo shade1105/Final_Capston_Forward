@@ -17,7 +17,7 @@ class face_function():
 
             hsv = cv2.cvtColor(filtered_image, cv2.COLOR_BGR2HSV)
             #lower_blue = np.array([0, 180, 55])
-            lower_blue = np.array([0, 90, 55])
+            lower_blue = np.array([0, 90, 0])
             upper_blue = np.array([20, 255, 200])
 
             hsvmask = cv2.inRange(hsv, lower_blue, upper_blue)
@@ -27,69 +27,74 @@ class face_function():
 
             res = cv2.bitwise_xor(cv2image, filtered_image, mask=hsvmask)
 
-
             ##area crop
             nlabels, labels, stats, centroids = cv2.connectedComponentsWithStats(hsvmask)
 
-            for i in range(nlabels):
-                if i < 2:
-                    continue
+            #라벨이 존재 할 시
+            if np.sum(labels) != 0:
+                for i in range(nlabels):
+                    if i < 2:
+                        continue
 
-                area = stats[i, cv2.CC_STAT_AREA]
-                left = stats[i, cv2.CC_STAT_LEFT]
-                top = stats[i, cv2.CC_STAT_TOP]
-                width = stats[i, cv2.CC_STAT_WIDTH]
-                height = stats[i, cv2.CC_STAT_HEIGHT]
+                    area = stats[i, cv2.CC_STAT_AREA]
+                    left = stats[i, cv2.CC_STAT_LEFT]
+                    top = stats[i, cv2.CC_STAT_TOP]
+                    width = stats[i, cv2.CC_STAT_WIDTH]
+                    height = stats[i, cv2.CC_STAT_HEIGHT]
 
-                if area > 2500:
-                    cv2.rectangle(res, (left - 30, top - 30), (left + width + 30, top + height + 3), (0, 0, 255), 1)
+                    if area > 2500:
+                        cv2.rectangle(res, (left - 30, top - 30), (left + width + 30, top + height + 3), (0, 0, 255), 1)
 
+                    face_locations = face_recognition.face_locations(cv2image)
+                    face_encodings = face_recognition.face_encodings(cv2image, face_locations)
+                    face_encodings = np.asarray(face_encodings)
 
-                face_locations = face_recognition.face_locations(cv2image)
-                face_encodings = face_recognition.face_encodings(cv2image, face_locations)
-                face_encodings = np.asarray(face_encodings)
+                    ## 특징값 저장
+                    df = pd.DataFrame(face_encodings)
+                    csvfiledir = "students/" + str(stu_num) + "_" + name + "/" + "captured_feature_data.csv"
 
-                ## 특징값 저장
-                df = pd.DataFrame(face_encodings)
-                csvfiledir = "students/" + str(stu_num) + "_" + name + "/" + "captured_feature_data.csv"
+                    # 파일이 이미 존재한다면
+                    if (os.path.isfile(csvfiledir)):
+                        countA = 0
+                        countB = 0
 
-                # 파일이 이미 존재한다면
-                if (os.path.isfile(csvfiledir)):
-                    countA = 0
-                    countB = 0
+                        #저장된 csv값과 얼굴 특징 비교, 출석 알고리즘
+                        with open(csvfiledir, 'r') as csvfile:
+                            reader = csv.reader(csvfile, delimiter=',')
 
-                    #저장된 csv값과 얼굴 특징 비교, 출석 알고리즘
-                    with open(csvfiledir, 'r') as csvfile:
-                        reader = csv.reader(csvfile, delimiter=',')
+                            for row in reader:
 
-                        for row in reader:
+                                countA = countA+1
+                                face_feature = list(map(float, row))
 
-                            countA = countA+1
-                            face_feature = list(map(float, row))
+                                face_distances = face_recognition.face_distance(face_feature, face_encodings)
 
-                            face_distances = face_recognition.face_distance(face_feature, face_encodings)
+                                print('저장된 데이터와 ', 100-(face_distances*100), '% 일치합니다.')
+                                if face_distances<0.3:
+                                    df.to_csv(csvfiledir, mode='a', index=False, header=None)
+                                    break
+                                else:
+                                    countB = countB + 1
+                        csvfile.close()
 
-                            print('저장된 데이터와 ', 100-(face_distances*100), '% 일치합니다.')
-                            if face_distances<0.3:
-                                df.to_csv(csvfiledir, mode='a', index=False, header=None)
-                                break
-                            else:
-                                countB = countB + 1
-                    csvfile.close()
+                        #csv의 모든 특징 매치 후 일치하지 않는다면 False
+                        if countA == countB:
+                            print('check')
+                            return False
 
-                    #csv의 모든 특징 매치 후 일치하지 않는다면 False
-                    if countA == countB:
-                        print('check')
-                        return False
+                    #파일이 없다면
+                    else:
+                        df.to_csv(csvfiledir, index=False, header=None)
 
-                # 파일이 없다면
-                else:
-                    df.to_csv(csvfiledir, index=False, header=None)
+                    return True
 
-                return True
-
+            #이미지 밝기 낮음
+            else:
+                return False
+        #얼굴 인식 안됨
         else:
             return False
+
 
     def check_face_num(self, cv2_image):
         face_landmark_list = face_recognition.face_landmarks(cv2_image)

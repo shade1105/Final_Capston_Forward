@@ -159,6 +159,7 @@ def decode():
     name = user.get('name')
 
     f = open('file.txt', 'w')
+
     image = request.get_json()['image'].replace('data:image/png;base64,', '')
     f.write(image)
     f.close()
@@ -187,7 +188,9 @@ def decode():
         imagedir = 'students/' + str(stu_num) + \
             '_' + name + '/' + time_today + '.png'
 
+
         if check == True:
+
             im.save(imagedir)
 
             result = {
@@ -197,9 +200,10 @@ def decode():
             return result
 
         elif check == False:
+
             result = {
                 "success": False,
-                "msg": "얼굴 인식이 실패하였습니다"
+                "msg": "얼굴 인식이 실패하였습니다."
             }
             return result
 
@@ -242,6 +246,8 @@ def imgencode(name, stu_num, date):
     :param date: 날짜 
     :return : ./stu_num/Name/date.png 라는 파일을 encode 해줌
     """
+
+
     with open("./students/{}_{}/{}.png".format(stu_num, name, date), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
 

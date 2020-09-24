@@ -27,7 +27,7 @@ export class AttentionAdminComponent implements OnInit {
         this.admin_num = this.token.admin_num
       },
       err => {
-        return false
+        this.admin = false
       }
     )
   }
