@@ -90,9 +90,11 @@ class face_function():
 
             #이미지 밝기 낮음
             else:
+                print('밝기 낮음')
                 return False
         #얼굴 인식 안됨
         else:
+            print('얼굴 인식 안됨')
             return False
 
 
