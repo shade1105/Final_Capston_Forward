@@ -359,6 +359,18 @@ def adminAtten():
     }
     return result
 
+@app.route("/static/admin/attenstatus", methods=["POST"])
+def get_stu_atten_status():
+    week = request.get_json()
+    print(week)
+    db = Signdatabase()
+    data = db.get_atten_status_by_week(week)
+    result = {
+        'data' : data
+    }
+
+    return result
+
 
 @app.route("/static/admin/updateAtten", methods=["POST"])
 def adminAttenUpdate():

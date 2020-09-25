@@ -3,8 +3,8 @@ export class Attention {
   private _week: number;
   private _date: string;
   private _attend: string;
-  
-  constructor(stu_num: number ,week: number, date: string, attend: string) {
+
+  constructor(stu_num: number, week: number, date: string, attend: string) {
     this._stu_num = stu_num;
     this._week = week;
     this._date = date;

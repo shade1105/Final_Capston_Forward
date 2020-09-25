@@ -3,11 +3,13 @@ export class adminAtten {
   private _pvnumber: number;
   private _username: string;
   private _usernumber: number;
+  private _attend: string;
 
-  constructor(pvnumber: number, username: string, usernumber: number) {
+  constructor(pvnumber: number, username: string, usernumber: number, attend: string) {
     this._pvnumber = pvnumber;
     this._username = username;
     this._usernumber = usernumber;
+    this._attend = attend;
   }
   get pvnumber(): number {
     return this._pvnumber;
@@ -26,5 +28,12 @@ export class adminAtten {
   }
   set usernumber(value: number) {
     this.usernumber = value;
+  }
+
+  get attend(): string {
+    return this._attend;
+  }
+  set attend(value: string) {
+    this.attend = value;
   }
 }

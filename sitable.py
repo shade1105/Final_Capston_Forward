@@ -174,3 +174,17 @@ class Signdatabase(Database):
             result = e
 
         return result
+
+    def get_atten_status_by_week(self, week):
+        sql = 'SELECT USER.stu_num , USER.name , atten.atten '
+        sql += 'FROM  users '
+        sql += 'AS USER LEFT OUTER JOIN attend '
+        sql += 'AS atten ON user.stu_num = atten.stu_num '
+        sql += "WHERE week={};".format(week)
+        try:
+            result = self.executeAll(sql)
+            self.db.commit()
+        except Exception as e:
+            result = e
+
+        return result

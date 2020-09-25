@@ -43,7 +43,7 @@ export class AttentionStuComponent implements OnInit {
       attenupdate: this.selectebox,
     };
     //TODO POST 요청할때 오류가 뜨네  왜 그런걸까
-    //수정하고 새로고침하고 페이지 reload 해줘야함 
+    //수정하고 새로고침하고 페이지 reload 해줘야함
     this.authService.updateAdminAtten(attenupdate).subscribe();
   }
   ngOnInit() {

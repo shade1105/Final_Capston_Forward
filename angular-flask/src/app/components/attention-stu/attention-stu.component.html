@@ -78,7 +78,8 @@
                 <th scope="col">마감일</th>
                 <th scope="col">출결 현황</th>
                 <th scope="col">상세이력</th>
-                <th scope="col">출석하기</th>
+                <th scope="col" *ngIf="!admin">출석하기</th>
+                <th scope="col" *ngIf="admin">출석수정</th>
               </tr>
             </thead>
             <tbody id="tty" *ngFor="let attention of Attentionlist">
@@ -94,27 +95,23 @@
                     (click)="clicked(attention.week)"
                   >
                     보기
-                  </button>
-                  
-                  <button
-                    type="button"
-                    class="btn btn-outline-dark btn-sm"
-                    (click)="clickevent(attention.week)"
-                  >
-                    출석
-                  </button>
-                <ng-container *ngIf="admin">
-                  
-                  <article>
-                      <select (change)="selectChangeHandler($event,attention.week)">
-                        <option >출결사항수정</option>
-                        <option >지각</option>
-                        <option >출석</option>
-                        <option >결석</option>
+                </button></td>
+                <td>
+                    <button *ngIf="!admin"
+                      type="button"
+                      class="btn btn-outline-dark btn-sm"
+                      (click)="clickevent(attention.week)"
+                    >
+                      출석
+                    </button>
+                  <article *ngIf="admin">
+                    <select (change)="selectChangeHandler($event,attention.week)">
+                      <option >출결사항수정</option>
+                      <option >지각</option>
+                      <option >출석</option>
+                      <option >결석</option>
                     </select>
-                </article>
-                    
-                  </ng-container>
+                  </article>
                 </td>
               </tr>
             </tbody>
@@ -133,7 +130,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="staticBackdropLabel">
-                  Model title
+                  <b>출석일: {{stu_atten_date}}</b>
                 </h5>
                 <button
                   type="button"
@@ -151,8 +148,7 @@
                   width="380"
                   alt="Responsive image"
                 />
-                  <br>
-                  <b>출석일: {{stu_atten_date}}</b>
+
               </div>
               <div class="modal-footer">
                 <button

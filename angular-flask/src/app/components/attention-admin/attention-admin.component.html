@@ -66,8 +66,27 @@
             </thead>
             <tbody>
               <tr class="text-center">
-                <th scope="row">1주차</th>
-                <td>2020.07.29.</td>
+                <th scope="row">
+                  <select (change)="selectWeek($event)">
+                    <option >1</option>
+                    <option >2</option>
+                    <option >3</option>
+                    <option >4</option>
+                    <option >5</option>
+                    <option >6</option>
+                    <option >7</option>
+                    <option >8</option>
+                    <option >9</option>
+                    <option >10</option>
+                    <option >11</option>
+                    <option >12</option>
+                    <option >13</option>
+                    <option >14</option>
+                    <option >15</option>
+                    <option >16</option>
+                  </select>
+                </th>
+                <td>2020.08.06.</td>
                 <td>정보보호프로그래밍</td>
                 <td>홍길동</td>
                 <td>3</td>
@@ -86,7 +105,7 @@
                 <th scope="col" class="text-center">학번</th>
                 <th scope="col" class="text-center">학과</th>
                 <th scope="col" class="text-center">출결 현황</th>
-                <th scope="col" class="text-center">이미지</th>
+                <th scope="col" class="text-center">상세확인</th>
               </tr>
             </thead>
             <tbody id="tty" *ngFor="let adminAtten of adminAttenlist">
@@ -97,6 +116,8 @@
                 <td>{{ adminAtten.username }}</td>
                 <td>{{ adminAtten.usernumber }}</td>
                 <td>정보보호학과</td>
+                <td>{{ adminAtten.attend }}
+                </td>
                 <td>
                   <button
                     style="background-color: transparent"
@@ -104,13 +125,6 @@
                   >
                     확인
                   </button>
-                </td>
-                <td>
-                  <img
-                    src="../../../assets/dog.jpg"
-                    width="80"
-                    alt="test_face"
-                  />
                 </td>
               </tr>
             </tbody>
