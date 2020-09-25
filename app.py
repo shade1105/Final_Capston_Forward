@@ -217,9 +217,9 @@ def decode():
 @app.route("/static/image/encode/send", methods=["POST", "GET"])
 def imgSend():
     """
-    프론트 상에서 POST 요청이 들어오면 이미지 파일을 encode해서 전송해줌 
-    attention-stu 상에서 보기 버튼 클릭시 실행 
-    return : base64 encode data 
+    프론트 상에서 POST 요청이 들어오면 이미지 파일을 encode해서 전송해줌
+    attention-stu 상에서 보기 버튼 클릭시 실행
+    return : base64 encode data
     """
     if request.method == "POST":
         name = request.get_json()[0]['name']
@@ -248,10 +248,10 @@ def imgSend():
 
 def imgencode(name, stu_num, date):
     """
-    파라미터로 받은 위치에 사진을 base64이미지 String 형식으로 반환해줌 
+    파라미터로 받은 위치에 사진을 base64이미지 String 형식으로 반환해줌
     :param name: 학생이름
     :param stu_num: 학번
-    :param date: 날짜 
+    :param date: 날짜
     :return : ./stu_num/Name/date.png 라는 파일을 encode 해줌
     """
 
@@ -265,9 +265,9 @@ def imgencode(name, stu_num, date):
 def atten(stunum):
     """
     과목생성 페이지가 없어서 인위적으로 데이터베이스에 과목을 생성하기위해
-    구현한 로직 
+    구현한 로직
     :param : 학번
-    :return : 데이터베이스에 attend테이블에 데이터 생성  
+    :return : 데이터베이스에 attend테이블에 데이터 생성
     """
     db = Signdatabase()
     a, b, c, f = map(int, '2020,08,25,11'.split(','))
@@ -308,7 +308,7 @@ def subject_index():
 def attendance_check():
     """
     프론트에서 출석데이터를 요청했을경우 처리해주는 로직
-    :param : 
+    :param :
     :return : 얼굴인식 값과 학번을 통하여 atten_update() 로직을 실행
     """
     data = request.get_json()[0]
