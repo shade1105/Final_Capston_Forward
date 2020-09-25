@@ -96,6 +96,7 @@
                   >
                     보기
                   </button>
+                  
                   <button
                     type="button"
                     class="btn btn-outline-dark btn-sm"
@@ -103,6 +104,18 @@
                   >
                     출석
                   </button>
+                <ng-container *ngIf="admin">
+                  
+                  <article>
+                      <select (change)="selectChangeHandler($event,attention.week)">
+                        <option >출결사항수정</option>
+                        <option >지각</option>
+                        <option >출석</option>
+                        <option >결석</option>
+                    </select>
+                </article>
+                    
+                  </ng-container>
                 </td>
               </tr>
             </tbody>
@@ -148,9 +161,7 @@
                 >
                   닫기
                 </button>
-                <button type="button" class="btn btn-primary">
-                  확인
-                </button>
+                <button type="button" class="btn btn-primary">확인</button>
               </div>
             </div>
           </div>

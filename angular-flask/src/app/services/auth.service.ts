@@ -111,6 +111,11 @@ export class AuthService {
     const Url = this.prepEndpoint("static/admin/atten");
     return this.http.get(Url, httpOptions);
   }
+  updateAdminAtten(json): Observable<any>{
+    const url = this.prepEndpoint('static/admin/updateAtten');
+    
+    return this.http.post(url,json,httpOptions)
+  }
   prepEndpoint(ep) {
     return "http://localhost:9999/" + ep;
     //return ep;

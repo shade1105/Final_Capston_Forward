@@ -188,7 +188,6 @@ def decode():
         imagedir = 'students/' + str(stu_num) + \
             '_' + name + '/' + time_today + '.png'
 
-
         if check == True:
 
             im.save(imagedir)
@@ -246,7 +245,6 @@ def imgencode(name, stu_num, date):
     :param date: 날짜 
     :return : ./stu_num/Name/date.png 라는 파일을 encode 해줌
     """
-
 
     with open("./students/{}_{}/{}.png".format(stu_num, name, date), "rb") as img_file:
         my_string = base64.b64encode(img_file.read())
@@ -355,12 +353,33 @@ def atten_update(face_data, stu_num, week):
         return "결석"
 
 
-@app.route("/static/admin/atten",methods=["POST", "GET"])
+@app.route("/static/admin/atten", methods=["POST", "GET"])
 def adminAtten():
+    """
+    어드민 관리자가 학생들에 모든 출석정보를 확인하기 위해서 만들어줌 
+    :param : Front json 요청 
+    :return : return Json 학생 데이터
+    """
     db = Signdatabase()
     data = db.get_all_user_data()
     result = {
         'msg': data
+    }
+    return result
+
+
+@app.route("/static/admin/updateAtten", methods=["POST"])
+def adminAttenUpdate():
+    """
+    관리자가 학생데이터 수정시 사용하는 함수 
+    :param : Front json 요청 
+    :return : 디비 데이터 수정 
+    """
+    db = Signdatabase()
+    db.stu_atten_date_updating(request.get_json()['usernum'], request.get_json()[
+                               'week'], request.get_json()['attenupdate'])
+    result = {
+        'msg': 'update'
     }
     return result
 
