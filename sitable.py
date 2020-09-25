@@ -146,7 +146,6 @@ class Signdatabase(Database):
             result = e
         return result
 
-
     def getstu_atten_date(self, stu_num, date):
         sql = "SELECT stu_atten_date "
         sql += "FROM attend "
@@ -157,3 +156,11 @@ class Signdatabase(Database):
         except Exception as e:
             return {"error": "{}".format(e)}
         return atten_date
+
+    def get_all_user_data(self):
+        sql = 'SELECT * FROM users'
+        try:
+            result = self.executeAll(sql)
+        except Exception as e :
+            result = e 
+        return result
