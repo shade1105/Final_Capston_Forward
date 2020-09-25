@@ -21,6 +21,7 @@ export class AttentionStuComponent implements OnInit {
   fullImagePath: string;
   converted_image: string;
   Attentionlist = [];
+  stu_atten_date: string;
   selectebox: string = "";
   selectChangeHandler(event: any, number) {
     var attenupdate;
@@ -101,12 +102,11 @@ export class AttentionStuComponent implements OnInit {
     usernum = JSON.parse(dsd).stu_num;
     username = JSON.parse(dsd).name;
     var cdcd;
-    this.authService
-      .getImageEncdoe(usernum, username, asd)
-      .subscribe((data) => {
-        cdcd = data["msg"];
-        this.converted_image = "data:image/jpeg;base64," + cdcd;
-      });
+    this.authService.getImageEncode(usernum, username, asd).subscribe(data => {
+      cdcd = data.image;
+      this.stu_atten_date = data.stu_atten_date
+      this.converted_image = "data:image/jpeg;base64," + cdcd;
+    });
   }
 
   clickevent(number) {

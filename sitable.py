@@ -146,6 +146,17 @@ class Signdatabase(Database):
             result = e
         return result
 
+    def getstu_atten_date(self, stu_num, date):
+        sql = "SELECT stu_atten_date "
+        sql += "FROM attend "
+        sql += "WHERE stu_num='{}' AND atten_date='{}';".format(stu_num, date)
+
+        try:
+            atten_date = self.executeOne(sql)
+        except Exception as e:
+            return {"error": "{}".format(e)}
+        return atten_date
+
     def get_all_user_data(self):
         sql = 'SELECT * FROM users'
         try:
@@ -153,6 +164,7 @@ class Signdatabase(Database):
         except Exception as e :
             result = e 
         return result 
+    
     def stu_atten_date_updating(self, stu_num, week, attenupdate):
         sql = 'UPDATE attend SET atten = "{}"'.format(attenupdate)
         sql += ' WHERE (WEEK={} AND stu_num={})'.format(week, stu_num)
