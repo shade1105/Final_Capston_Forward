@@ -81,7 +81,7 @@ export class AuthService {
     const sendImage = this.prepEndpoint("static/image/decodeImage");
     return this.http.post(sendImage, data, httpOptions);
   }
-  getImageEncdoe(usernum, username, date): Observable<any> {
+  getImageEncode(usernum, username, date): Observable<any> {
     const getEncodeImage = this.prepEndpoint("/static/image/encode/send");
     const data = [
       {

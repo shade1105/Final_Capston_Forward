@@ -78,6 +78,7 @@
                 <th scope="col">날짜</th>
                 <th scope="col">출결 현황</th>
                 <th scope="col">상세이력</th>
+                <th scope="col">출석하기</th>
               </tr>
             </thead>
             <tbody id="tty" *ngFor="let attention of Attentionlist">
@@ -85,9 +86,7 @@
                 <th scope="row">{{ attention.week }}주차</th>
                 <td id="week">{{ attention.date }}</td>
                 <td>{{ attention.attend }}</td>
-                <td></td>
-                <td>
-                  <button
+                <td><button
                     type="button"
                     class="btn btn-outline-dark btn-sm"
                     data-toggle="modal"
@@ -95,7 +94,8 @@
                     (click)="clicked(attention.week)"
                   >
                     보기
-                  </button>
+                  </button></td>
+                <td>
                   <button
                     type="button"
                     class="btn btn-outline-dark btn-sm"
@@ -139,6 +139,8 @@
                   width="380"
                   alt="Responsive image"
                 />
+                  <br>
+                  <b>출석일: {{stu_atten_date}}</b>
               </div>
               <div class="modal-footer">
                 <button

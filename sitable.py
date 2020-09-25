@@ -145,3 +145,15 @@ class Signdatabase(Database):
         except Exception as e:
             result = e
         return result
+
+
+    def getstu_atten_date(self, stu_num, date):
+        sql = "SELECT stu_atten_date "
+        sql += "FROM attend "
+        sql += "WHERE stu_num='{}' AND atten_date='{}';".format(stu_num, date)
+
+        try:
+            atten_date = self.executeOne(sql)
+        except Exception as e:
+            return {"error": "{}".format(e)}
+        return atten_date

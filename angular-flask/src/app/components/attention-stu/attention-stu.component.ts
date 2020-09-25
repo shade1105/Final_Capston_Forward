@@ -17,12 +17,13 @@ export class AttentionStuComponent implements OnInit {
   fullImagePath: string;
   converted_image: string;
   Attentionlist = [];
+  stu_atten_date: string;
  ngOnInit() {
   /*
   ** 생성자가 호출될 때 배열에대한 날짜 포멧에 따라
-  ** 초기화해서 생성해줌  
+  ** 초기화해서 생성해줌
   ** input : null
-  ** return : null 
+  ** return : null
   ** author  : 이재현
   */
   var msg;
@@ -47,7 +48,7 @@ export class AttentionStuComponent implements OnInit {
 
   clicked(number) {
     /*
-    ** 해당 버튼클릭시 number에 반환하는 값을 이미지형식으로 보여줌 
+    ** 해당 버튼클릭시 number에 반환하는 값을 이미지형식으로 보여줌
     ** input : number(week)
     ** return : image
     ** author  : 이재현
@@ -62,21 +63,20 @@ export class AttentionStuComponent implements OnInit {
     usernum = JSON.parse(dsd).stu_num;
     username = JSON.parse(dsd).name;
     var cdcd;
-    this.authService
-      .getImageEncdoe(usernum, username, asd)
-      .subscribe((data) => {
-        cdcd = data["msg"];
-        this.converted_image = "data:image/jpeg;base64," + cdcd;
-      });
+    this.authService.getImageEncode(usernum, username, asd).subscribe(data => {
+      cdcd = data.image;
+      this.stu_atten_date = data.stu_atten_date
+      this.converted_image = "data:image/jpeg;base64," + cdcd;
+    });
   }
 
   clickevent(number) {
     //현재 날짜 체크해서 출석 가능/불가능 확인 알고리즘 추가
     /*
     ** 해당 버튼클릭시 number에 반환하는 값에 action-cam 을 실행하여
-    ** 출석 로직을 실행 
+    ** 출석 로직을 실행
     ** input : number(week)
-    ** return : null 
+    ** return : null
     ** author  : 이재현
     */
     var dsd;

@@ -183,8 +183,7 @@ def decode():
             os.mkdir('students/' + str(stu_num) + '_' + name)
 
         check = ff.registerimage(cv2_image, stu_num, name)
-        time_today = str(datetime.now().year) + "." + \
-            str(datetime.now().month) + "." + str(datetime.now().day)
+        time_today = str(datetime.now().date())
         imagedir = 'students/' + str(stu_num) + \
             '_' + name + '/' + time_today + '.png'
 
@@ -226,14 +225,23 @@ def imgSend():
         name = request.get_json()[0]['name']
         stu_num = request.get_json()[0]['stu_num']
         date = request.get_json()[0]['date']
+
+        print(date)
+        a, b, c = map(str, date.split('.'))
+        basedate = a + '-' + b + '-' + c + ' 11:00:00'
+        db = Signdatabase()
+        atten_date = str(db.getstu_atten_date(stu_num, basedate).get('stu_atten_date'))[0:10]
+
         try:
             result = {
-                "msg": imgencode(name, stu_num, date).decode('utf-8')
+                "success": True,
+                "stu_atten_date": atten_date,
+                "image": imgencode(name, stu_num, atten_date).decode('utf-8')
             }
             return result
         except:
             result = {
-                "msg": None
+                "success": False
             }
             return result
 
@@ -247,28 +255,11 @@ def imgencode(name, stu_num, date):
     :return : ./stu_num/Name/date.png 라는 파일을 encode 해줌
     """
 
-
     with open("./students/{}_{}/{}.png".format(stu_num, name, date), "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
+        image_string = base64.b64encode(img_file.read())
+        img_file.close()
 
-    return my_string
-
-
-# 로그아웃 로직
-@app.route('/logout')
-def logout():
-    custom_resp = Response("COOKIE 제거")
-    custom_resp.set_cookie('USERID', expires=0)
-    return custom_resp
-
-
-# 쿠키 값 확인 로직
-@app.route("/loginstatus")
-def cookie_status():
-    tempstr = request.cookies.get('stu_num', '빈문자열')
-    tempstr = tempstr.encode("UTF-8")
-
-    return (base64.b64decode(tempstr)).decode('UTF-8')
+    return image_string
 
 
 def atten(stunum):
