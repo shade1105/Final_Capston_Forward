@@ -22,6 +22,7 @@ export class AttentionAdminComponent implements OnInit {
 
   ngOnInit() {
     // TODO 이미지 공간에있는저건 어떻게 처리해아할까 흠 ..
+    // TODO 출석버튼 대신에 관리자가 출석을 직접적으로 출석시키는방식
     var msg;
     this.authService.getAlluserData().subscribe((data) => {
       msg = data["msg"];
@@ -41,6 +42,7 @@ export class AttentionAdminComponent implements OnInit {
         this.admin = false;
       }
     );
+    
   }
   clickevent(number) {
     var bc;
