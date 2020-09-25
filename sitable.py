@@ -163,4 +163,15 @@ class Signdatabase(Database):
             result = self.executeAll(sql)
         except Exception as e :
             result = e 
+        return result 
+    
+    def stu_atten_date_updating(self, stu_num, week, attenupdate):
+        sql = 'UPDATE attend SET atten = "{}"'.format(attenupdate)
+        sql += ' WHERE (WEEK={} AND stu_num={})'.format(week, stu_num)
+        try:
+            result = self.executeOne(sql)
+            self.db.commit()
+        except Exception as e:
+            result = e
+
         return result
