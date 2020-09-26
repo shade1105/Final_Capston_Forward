@@ -11,6 +11,7 @@ class face_function():
     def registerimage(self, cv2image, stu_num, name):
         face_landmarks_list = face_recognition.face_landmarks(cv2image)
         if face_landmarks_list:
+
             #이미지 얼굴 영역 추출
             filtered_image = self.apply_brightness_contrast(cv2image, -127, 127)
 

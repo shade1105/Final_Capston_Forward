@@ -36,6 +36,12 @@ export class ActionCamComponent implements OnInit {
   };
   videoWidth = 0;
   videoHeight = 0;
+  /*
+    ** HTML 상에서 Cam 에서 받은 이미지를 저장하는 로직 
+    ** input : null
+    ** return : saveImage
+    ** author  : 이재현
+    */
   startcamera() {
     if (!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)) {
       navigator.mediaDevices
@@ -79,7 +85,6 @@ export class ActionCamComponent implements OnInit {
 
   saveas() {
     var encodeImage = this.canvas.nativeElement.toDataURL("image/png");
-
     const jsonEncodeImage = JSON.stringify(encodeImage);
     const data = {
     user: localStorage.getItem('user'),
@@ -88,6 +93,14 @@ export class ActionCamComponent implements OnInit {
 
     this.authService.sendImageDecode(data).subscribe(data => {
       if (data.success) {
+        var dsd;
+        var usernum;
+        var asd;
+        dsd = localStorage.getItem("user");
+        usernum = JSON.parse(dsd).stu_num;
+        asd = localStorage.getItem("number")
+        this.authService.postAttendData(asd, usernum).subscribe();
+        localStorage.removeItem('number')
         this.flashMessage.show(data.msg, {
           cssClass: "alert-success",
           timeout: 3000

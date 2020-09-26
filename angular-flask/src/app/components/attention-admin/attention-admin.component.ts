@@ -21,25 +21,17 @@ export class AttentionAdminComponent implements OnInit {
 
 
   ngOnInit() {
-
-
-  }
-
-  checkadmin() {
     this.authService.checkadmin().subscribe(
       token => {
         this.token = token
+        this.admin = this.token.admin
+        this.admin_num = this.token.admin_num
       },
       err => {
-        console.log(err)
-        return false;
+        return false
       }
     )
-    this.admin = this.token.admin
-    this.admin_num = this.token.admin_num
-    return this.admin
   }
-
 
 
 }
