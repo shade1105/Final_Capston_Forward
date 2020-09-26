@@ -10,6 +10,10 @@ import { AuthService } from "../../services/auth.service";
 })
 export class NavbarComponent implements OnInit {
 
+  token: any;
+  admin: boolean;
+  admin_num: number;
+
   constructor(
   private router: Router,
   private authService: AuthService,
@@ -17,6 +21,18 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.authService.checkadmin().subscribe(
+      token => {
+        this.token = token
+        this.admin = this.token.admin
+        this.admin_num = this.token.admin_num
+      },
+      err => {
+        this.admin = false
+      }
+    )
+
   }
   onLogoutClick() {
     this.authService.logout();
@@ -24,12 +40,17 @@ export class NavbarComponent implements OnInit {
       cssClass: "alert-success",
       timeout: 3000
     });
+
     this.router.navigate([""]);
     return false;
   }
   //로그인되어있으면 true반환
   checkLoggedIn() {
     return this.authService.loggedIn();
+  }
+
+  checkAdmin() {
+    return this.authService.checkadmin();
   }
 
 

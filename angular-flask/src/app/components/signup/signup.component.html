@@ -48,10 +48,10 @@
     <link href="signup.component.scss" rel="stylesheet">
   </head>
   <body class="text-center">
-    <form class="form-signin">
-      <img class="mb-4" src="../../../assets/logo.png" alt="logo" width="150" height="135">
+    <form class="form-signin"><br><br>
+      <img class="mb-4" src="../../../assets/logo.png" alt="logo" width="250"><br>
 
-      <h1 class="h3 mb-3 font-weight-normal">Sign up</h1>
+     <!-- <h1 class="h3 mb-3 font-weight-normal">Sign up</h1> -->
 
       <form (ngSubmit)="onRegisterSubmit()">
       <div class="divbody">
@@ -81,12 +81,15 @@
         </div>
 
 
+<br>
 
-
-        <button class="btn btn-lg btn btn-secondary btn-block" type="submit" value="Signup">Sign up</button>
+        <button class="btn btn-lg btn btn-secondary btn-block" type="submit" value="Signup">회원가입</button>
       </div>
       </form>
-      <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+      <footer class="container">
+            <p> Copyright&copy; &middot; 2020 &middot; Forward &middot; All rights reserved.</p>
+
+    </footer>
     </form>
 </body>
 </html>

@@ -27,6 +27,7 @@ class face_function():
 
             res = cv2.bitwise_xor(cv2image, filtered_image, mask=hsvmask)
 
+
             ##area crop
             nlabels, labels, stats, centroids = cv2.connectedComponentsWithStats(hsvmask)
 

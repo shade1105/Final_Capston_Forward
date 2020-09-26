@@ -25,6 +25,7 @@ import { PictureIndexComponent } from './components/picture-index/picture-index.
 import { SigninAdminComponent } from './components/signin-admin/signin-admin.component';
 import { SignupAdminComponent } from './components/signup-admin/signup-admin.component';
 import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component";
+import { InfoComponent } from './components/info/info.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component
     PictureIndexComponent,
     SigninAdminComponent,
     SignupAdminComponent,
-    MkSubjectComponent
+    MkSubjectComponent,
+    InfoComponent
 
   ],
   imports: [

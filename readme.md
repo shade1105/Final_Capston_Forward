@@ -2,6 +2,6 @@
 
 ## 실행순서
 
-#### app.py
+#### 1)app.py
 
 #### 2)cd angular-flask > ng serve

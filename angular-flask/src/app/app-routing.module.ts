@@ -13,6 +13,7 @@ import { PictureIndexComponent } from './components/picture-index/picture-index.
 import { SigninAdminComponent } from './components/signin-admin/signin-admin.component';
 import { SignupAdminComponent } from './components/signup-admin/signup-admin.component';
 import { MkSubjectComponent } from "./components/mk-subject/mk-subject.component";
+import { InfoComponent } from "./components/info/info.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
@@ -26,7 +27,8 @@ const routes: Routes = [
   { path: "picture-index", component: PictureIndexComponent},
   { path: "signin-admin", component: SigninAdminComponent},
   { path: "signup-admin", component: SignupAdminComponent},
-  { path: "mk-subject", component: MkSubjectComponent }
+  { path: "mk-subject", component: MkSubjectComponent },
+  { path: "info", component: InfoComponent }
 ];
 
 @NgModule({
