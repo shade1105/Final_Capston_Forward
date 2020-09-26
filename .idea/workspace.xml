@@ -2,20 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="448642d9-c4b8-4316-9d3c-4bb00b7e25b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/44445_JaeHyun3Lee/2020.9.15.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/44445_JaeHyun3Lee/captured_feature_data.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/91514892_leejaehyun/2020.8.25.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/students/91514892_leejaehyun/captured_feature_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dbSQL.txt" beforeDir="false" afterPath="$PROJECT_DIR$/dbSQL.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/face.py" beforeDir="false" afterPath="$PROJECT_DIR$/face.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/file.txt" beforeDir="false" afterPath="$PROJECT_DIR$/file.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sitable.py" beforeDir="false" afterPath="$PROJECT_DIR$/sitable.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/91514672_김수운/2020.8.25.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/91514672_김수운/2020.9.11.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/students/91514672_김수운/2020.9.12.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/students/91514672_김수운/captured_feature_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/students/91514672_김수운/captured_feature_data.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,10 +16,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="RunManager">
     <configuration name="app" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Final_Capston_Angular" />
@@ -60,31 +48,24 @@
     <configuration />
   </component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="448642d9-c4b8-4316-9d3c-4bb00b7e25b3" name="Default Changelist" comment="" />
-      <created>1600788535924</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1600788535924</updated>
-    </task>
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1429" height="141" key="GridCell.Tab.0.bottom" timestamp="1601099213658">
+    <state width="1899" height="233" key="GridCell.Tab.0.bottom" timestamp="1601116072407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1429" height="141" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601099213658" />
-    <state width="1429" height="141" key="GridCell.Tab.0.center" timestamp="1601099213658">
+    <state width="1899" height="233" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601116072407" />
+    <state width="1899" height="233" key="GridCell.Tab.0.center" timestamp="1601116072407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1429" height="141" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601099213658" />
-    <state width="1429" height="141" key="GridCell.Tab.0.left" timestamp="1601099213657">
+    <state width="1899" height="233" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601116072407" />
+    <state width="1899" height="233" key="GridCell.Tab.0.left" timestamp="1601116072407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1429" height="141" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601099213657" />
-    <state width="1429" height="141" key="GridCell.Tab.0.right" timestamp="1601099213658">
+    <state width="1899" height="233" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601116072407" />
+    <state width="1899" height="233" key="GridCell.Tab.0.right" timestamp="1601116072407">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1429" height="141" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601099213658" />
+    <state width="1899" height="233" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601116072407" />
   </component>
 </project>

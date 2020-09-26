@@ -16,6 +16,15 @@
 CREATE DATABASE IF NOT EXISTS `capston` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `capston`;
 
+-- 테이블 capston.admin 구조 내보내기
+CREATE TABLE IF NOT EXISTS `admin` (
+  `admin_num` int(11) NOT NULL,
+  `password` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`admin_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
 -- 테이블 capston.attend 구조 내보내기
 CREATE TABLE IF NOT EXISTS `attend` (
   `stu_num` int(11) DEFAULT NULL,

@@ -106,7 +106,6 @@ class Signdatabase(Database):
 
     def update_atten(self, stu_num, week, atten):
         sql = 'UPDATE attend SET atten = "{}" '.format(atten)
-        #sql = ', atten_date = "{}" '.format()
         sql += 'WHERE (WEEK={} AND stu_num={}) '.format(week, stu_num)
         print(sql)
         try:
@@ -144,4 +143,48 @@ class Signdatabase(Database):
             result = self.executeOne(sql)
         except Exception as e:
             result = e
+        return result
+
+    def getstu_atten_date(self, stu_num, date):
+        sql = "SELECT stu_atten_date "
+        sql += "FROM attend "
+        sql += "WHERE stu_num='{}' AND atten_date='{}';".format(stu_num, date)
+
+        try:
+            atten_date = self.executeOne(sql)
+        except Exception as e:
+            return {"error": "{}".format(e)}
+        return atten_date
+
+    def get_all_user_data(self):
+        sql = 'SELECT * FROM users'
+        try:
+            result = self.executeAll(sql)
+        except Exception as e :
+            result = e 
+        return result 
+    
+    def stu_atten_date_updating(self, stu_num, week, attenupdate):
+        sql = 'UPDATE attend SET atten = "{}"'.format(attenupdate)
+        sql += ' WHERE (WEEK={} AND stu_num={})'.format(week, stu_num)
+        try:
+            result = self.executeOne(sql)
+            self.db.commit()
+        except Exception as e:
+            result = e
+
+        return result
+
+    def get_atten_status_by_week(self, week):
+        sql = 'SELECT USER.stu_num , USER.name , atten.atten '
+        sql += 'FROM  users '
+        sql += 'AS USER LEFT OUTER JOIN attend '
+        sql += 'AS atten ON user.stu_num = atten.stu_num '
+        sql += "WHERE week={};".format(week)
+        try:
+            result = self.executeAll(sql)
+            self.db.commit()
+        except Exception as e:
+            result = e
+
         return result

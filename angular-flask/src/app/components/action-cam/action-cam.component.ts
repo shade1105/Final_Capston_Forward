@@ -37,7 +37,7 @@ export class ActionCamComponent implements OnInit {
   videoWidth = 0;
   videoHeight = 0;
   /*
-    ** HTML 상에서 Cam 에서 받은 이미지를 저장하는 로직 
+    ** HTML 상에서 Cam 에서 받은 이미지를 저장하는 로직
     ** input : null
     ** return : saveImage
     ** author  : 이재현
@@ -93,6 +93,7 @@ export class ActionCamComponent implements OnInit {
 
     this.authService.sendImageDecode(data).subscribe(data => {
       if (data.success) {
+
         var dsd;
         var usernum;
         var asd;
@@ -101,6 +102,8 @@ export class ActionCamComponent implements OnInit {
         asd = localStorage.getItem("number")
         this.authService.postAttendData(asd, usernum).subscribe();
         localStorage.removeItem('number')
+
+
         this.flashMessage.show(data.msg, {
           cssClass: "alert-success",
           timeout: 3000

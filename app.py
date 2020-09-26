@@ -159,6 +159,7 @@ def decode():
     name = user.get('name')
 
     f = open('file.txt', 'w')
+
     image = request.get_json()['image'].replace('data:image/png;base64,', '')
     f.write(image)
     f.close()
@@ -182,12 +183,12 @@ def decode():
             os.mkdir('students/' + str(stu_num) + '_' + name)
 
         check = ff.registerimage(cv2_image, stu_num, name)
-        time_today = str(datetime.now().year) + "." + \
-            str(datetime.now().month) + "." + str(datetime.now().day)
+        time_today = str(datetime.now().date())
         imagedir = 'students/' + str(stu_num) + \
             '_' + name + '/' + time_today + '.png'
 
         if check == True:
+
             im.save(imagedir)
 
             result = {
@@ -197,9 +198,10 @@ def decode():
             return result
 
         elif check == False:
+
             result = {
                 "success": False,
-                "msg": "얼굴 인식이 실패하였습니다"
+                "msg": "얼굴 인식이 실패하였습니다."
             }
             return result
 
@@ -214,63 +216,57 @@ def decode():
 @app.route("/static/image/encode/send", methods=["POST", "GET"])
 def imgSend():
     """
-    프론트 상에서 POST 요청이 들어오면 이미지 파일을 encode해서 전송해줌 
-    attention-stu 상에서 보기 버튼 클릭시 실행 
-    return : base64 encode data 
+    프론트 상에서 POST 요청이 들어오면 이미지 파일을 encode해서 전송해줌
+    attention-stu 상에서 보기 버튼 클릭시 실행
+    return : base64 encode data
     """
     if request.method == "POST":
         name = request.get_json()[0]['name']
         stu_num = request.get_json()[0]['stu_num']
         date = request.get_json()[0]['date']
+
+        print(date)
+        a, b, c = map(str, date.split('.'))
+        basedate = a + '-' + b + '-' + c + ' 11:00:00'
+        db = Signdatabase()
+        atten_date = str(db.getstu_atten_date(stu_num, basedate).get('stu_atten_date'))[0:10]
+
         try:
             result = {
-                "msg": imgencode(name, stu_num, date).decode('utf-8')
+                "success": True,
+                "stu_atten_date": atten_date,
+                "image": imgencode(name, stu_num, atten_date).decode('utf-8')
             }
             return result
         except:
             result = {
-                "msg": None
+                "success": False
             }
             return result
 
 
 def imgencode(name, stu_num, date):
     """
-    파라미터로 받은 위치에 사진을 base64이미지 String 형식으로 반환해줌 
+    파라미터로 받은 위치에 사진을 base64이미지 String 형식으로 반환해줌
     :param name: 학생이름
     :param stu_num: 학번
-    :param date: 날짜 
+    :param date: 날짜
     :return : ./stu_num/Name/date.png 라는 파일을 encode 해줌
     """
+
     with open("./students/{}_{}/{}.png".format(stu_num, name, date), "rb") as img_file:
-        my_string = base64.b64encode(img_file.read())
+        image_string = base64.b64encode(img_file.read())
+        img_file.close()
 
-    return my_string
-
-
-# 로그아웃 로직
-@app.route('/logout')
-def logout():
-    custom_resp = Response("COOKIE 제거")
-    custom_resp.set_cookie('USERID', expires=0)
-    return custom_resp
-
-
-# 쿠키 값 확인 로직
-@app.route("/loginstatus")
-def cookie_status():
-    tempstr = request.cookies.get('stu_num', '빈문자열')
-    tempstr = tempstr.encode("UTF-8")
-
-    return (base64.b64decode(tempstr)).decode('UTF-8')
+    return image_string
 
 
 def atten(stunum):
     """
     과목생성 페이지가 없어서 인위적으로 데이터베이스에 과목을 생성하기위해
-    구현한 로직 
+    구현한 로직
     :param : 학번
-    :return : 데이터베이스에 attend테이블에 데이터 생성  
+    :return : 데이터베이스에 attend테이블에 데이터 생성
     """
     db = Signdatabase()
     a, b, c, f = map(int, '2020,08,25,11'.split(','))
@@ -311,7 +307,7 @@ def subject_index():
 def attendance_check():
     """
     프론트에서 출석데이터를 요청했을경우 처리해주는 로직
-    :param : 
+    :param :
     :return : 얼굴인식 값과 학번을 통하여 atten_update() 로직을 실행
     """
     data = request.get_json()[0]
@@ -347,6 +343,49 @@ def atten_update(face_data, stu_num, week):
             return "지각"
     elif face_data == False:
         return "결석"
+
+
+@app.route("/static/admin/atten", methods=["POST", "GET"])
+def adminAtten():
+    """
+    어드민 관리자가 학생들에 모든 출석정보를 확인하기 위해서 만들어줌 
+    :param : Front json 요청 
+    :return : return Json 학생 데이터
+    """
+    db = Signdatabase()
+    data = db.get_all_user_data()
+    result = {
+        'msg': data
+    }
+    return result
+
+@app.route("/static/admin/attenstatus", methods=["POST"])
+def get_stu_atten_status():
+    week = request.get_json()
+    print(week)
+    db = Signdatabase()
+    data = db.get_atten_status_by_week(week)
+    result = {
+        'data' : data
+    }
+
+    return result
+
+
+@app.route("/static/admin/updateAtten", methods=["POST"])
+def adminAttenUpdate():
+    """
+    관리자가 학생데이터 수정시 사용하는 함수 
+    :param : Front json 요청 
+    :return : 디비 데이터 수정 
+    """
+    db = Signdatabase()
+    db.stu_atten_date_updating(request.get_json()['usernum'], request.get_json()[
+                               'week'], request.get_json()['attenupdate'])
+    result = {
+        'msg': 'update'
+    }
+    return result
 
 
 if __name__ == "__main__":
