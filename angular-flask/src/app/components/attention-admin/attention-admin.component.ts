@@ -40,12 +40,8 @@ export class AttentionAdminComponent implements OnInit {
         this.adminAttenlist.push(
           new adminAtten(i+1, atten_data[i].name, atten_data[i].stu_num, atten_data[i].atten)
         )
-
       }
     })
-
-
-
 
   }
   clickevent(number) {
