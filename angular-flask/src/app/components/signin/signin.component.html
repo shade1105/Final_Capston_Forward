@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Signin Template · Bootstrap</title>
+    <title>Signin</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.5/examples/sign-in/">
 
@@ -43,7 +43,7 @@
           font-size: 3.5rem;
         }
       }
-      .divbody{ padding: 10px 5px 370px 5px;}
+      .divbody{ padding: 10px 5px 300px 5px;}
     </style>
     <!-- Custom styles for this template -->
     <link href="signin.component.scss" rel="stylesheet">
@@ -51,9 +51,9 @@
   <body class="text-center">
     <form class="form-signin">
       <div class="divbody">
-        <img class="mb-4" src="../../../assets/logo.png" alt="logo" width="150" height="135">
+        <img class="mb-4" src="../../../assets/logo.png" alt="logo" width="250" > <br><br>
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <!-- <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1> -->
         <form (ngSubmit)="onLoginSubmit()">
           <label class="sr-only">Student number</label>
           <input type="text" name="stu_num" [(ngModel)]="stu_num" id="inputEmail" class="form-control" placeholder="Student number" required autofocus>
@@ -65,17 +65,20 @@
 
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me"> Remember me
+              <input type="checkbox" value="remember-me"> 로그인 상태 유지
             </label>
+            <br><br>
           </div>
-          <input type="submit" class="btn btn-lg btn btn-secondary btn-block" value="Login"/>
+          <input type="submit" class="btn btn-lg btn btn-secondary btn-block" value="로그인"/>
 
           <div style="margin-right:auto; margin-left:auto; margin-top:10px;">
-                <button style="width:290px;" routerLink='/signup' class="btn btn-lg btn-secondary btn-block" value="pleaselogin">Sign up</button>
+                <button style="width:290px;" routerLink='/signup' class="btn btn-lg btn-secondary btn-block" value="pleaselogin">회원가입</button>
               </div>
    </form>
+
         </div>
-   <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
+
+<p class="mt-5 mb-3 text-muted"> Copyright&copy; &middot; 2020 &middot; Forward &middot; All rights reserved.</p>
 </form>
 </body>
 </html>

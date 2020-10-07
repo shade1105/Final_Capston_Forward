@@ -12,6 +12,12 @@ class face_function():
         face_landmarks_list = face_recognition.face_landmarks(cv2image)
         if face_landmarks_list:
 
+            #이미지 밝기 향상
+            contrast = 1.1
+            brightness = 1
+            cv2image[:, :, 2] = np.clip(contrast * cv2image[:, :, 2] + brightness, 0, 255)
+
+
             #이미지 얼굴 영역 추출
             filtered_image = self.apply_brightness_contrast(cv2image, -127, 127)
 
