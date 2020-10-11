@@ -57,7 +57,7 @@ def register():
     else:
         result = {
             "success": False,
-            "msg": msg
+            "msg": "등록에 실패하였습니다"
         }
         return result
 
@@ -79,7 +79,7 @@ def adminregister():
     else:
         result = {
             "success": False,
-            "msg": msg
+            "msg": "관리자 등록에 실패하였습니다"
         }
         return result
 
@@ -107,7 +107,7 @@ def signIn():
     else:
         result = {
             "success": False,
-            "msg": msg
+            "msg": "로그인에 실패하였습니다"
 
         }
         return result
@@ -140,7 +140,7 @@ def signInAdmin():
     else:
         result = {
             "success": False,
-            "msg": msg
+            "msg": "관리자 계정 로그인이 실패하였습니다"
         }
         return result
 
