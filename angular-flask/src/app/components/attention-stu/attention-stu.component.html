@@ -45,7 +45,7 @@
   <ng-template [ngIf]="checkLoggedIn()">
     <body class="p-3 mb-2 bg-light text-dark">
       <main role="main">
-        <br />
+        <br><br><br><br>
         <div><h2 style="text-align: center">출결 현황</h2></div>
         <br />
 
@@ -167,8 +167,7 @@
         </p>
 
         <footer class="container">
-            <p > Copyright&copy; &middot; 2020 &middot; Forward &middot; All rights reserved.</p>
-
+            <p class="text-center"> Copyright&copy; &middot; 2020 &middot; Forward &middot; All rights reserved.</p>
     </footer>
       </main>
       <script
@@ -206,9 +205,9 @@
   </ng-template>
 
   <ng-template [ngIf]="!checkLoggedIn()">
-    <br /><br /><br />
+    <br><br><br><br><br><br><br><br>
     <div style="text-align: center" class="container">
-      <img src="../../../assets/password.png" alt="login" width="200" /><br />
+      <img src="../../../assets/password.png" alt="login" width="200" /><br>
       <h4>
         <span class="text-danger">출결 현황</span>을 확인하시려면 로그인을
         해주세요.
