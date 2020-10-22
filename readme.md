@@ -15,6 +15,7 @@
 
 ## 사용기술 
 * Python /Flask
+* face_recognition
 * Angualr6 
 * Typescript
 * MYSQL 
