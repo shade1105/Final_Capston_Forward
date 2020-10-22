@@ -19,4 +19,4 @@
 ~~~
 
 ## 화면 
-![텍스트](./1.PNG “이미지이름”) 
+![텍스트](https://github.com/slackid/Final_Capston_Forward/blob/master/1.PNG “이미지이름”) 
