@@ -2,6 +2,10 @@
 
 ## 실행순서
 
-#### 1)app.py
+#### /Fian-Capston_Foward
+docker build -t backend:1.0 . 
+docker run -p 9999:9999 backend:1.0
 
-#### 2)cd angular-flask > ng serve
+#### /angular-Flask
+1)docker build -t fron:1.0 . 
+2)docker run -d -host=0.0.0.0 -p 443:443 fron:1.0 
