@@ -20,3 +20,17 @@
 
 ## 화면 
 [![텍스트](https://github.com/slackid/Final_Capston_Forward/blob/master/1.PNG)]()
+
+## 주요기능
+* 회원가입시 얼굴을 등록하여 그 얼굴과 현재 출석중인 사람과 얼굴이 같다고 판단되면 출석체크를 해줍니다
+
+
+## 사용기술 
+* Python /Flask
+* Angualr6 
+* Typescript
+* MYSQL 
+* Docker 
+* GCP 
+* Windows 10 
+* Ubuntu 
