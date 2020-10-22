@@ -3,8 +3,8 @@
 ## 실행순서
 
 #### /Fian-Capston_Foward
-docker build -t backend:1.0 . 
-docker run -p 9999:9999 backend:1.0
+###### 1) docker build -t backend:1.0 . 
+###### 2)docker run -p 9999:9999 backend:1.0
 
 #### /angular-Flask
 1)docker build -t fron:1.0 . 
